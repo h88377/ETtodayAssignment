@@ -7,12 +7,6 @@
 
 import UIKit
 
-final class AudioListCell: UICollectionViewCell {
-    static let identifier = "\(AudioListCell.self)"
-    
-    let longDescriptionLabel = UILabel()
-}
-
 enum AudioListReminder: String {
     case onError = "網路發生錯誤"
     case onEmpty = "無相關結果，請重新搜尋"
