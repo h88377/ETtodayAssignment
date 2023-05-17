@@ -31,13 +31,26 @@ class AudioListViewController: UIViewController {
 final class AudioListViewControllerTests: XCTestCase {
     
     func test_init_doesNotRequestAudioes() {
-        let loader = AudioLoaderSpy()
-        _ = AudioListViewController(audioLoader: loader)
+        let (_, loader) = makeSUT()
         
         XCTAssertEqual(loader.receivedKeywords, [])
     }
     
     // MARK: - Helpers
+    
+    private func makeSUT(file: StaticString = #filePath, line: UInt = #line) -> (AudioListViewController, AudioLoaderSpy) {
+        let loader = AudioLoaderSpy()
+        let sut = AudioListViewController(audioLoader: loader)
+        trackForMemoryLeak(sut, file: file, line: line)
+        trackForMemoryLeak(loader, file: file, line: line)
+        return (sut, loader)
+    }
+    
+    private func trackForMemoryLeak(_ instance: AnyObject, file: StaticString = #filePath, line: UInt = #line) {
+        addTeardownBlock { [weak instance] in
+            XCTAssertNil(instance, "Instance should have been deallocated. Potential memory leak.", file: file, line: line)
+        }
+    }
     
     private class AudioLoaderSpy: AudioLoader {
         private(set) var receivedKeywords = [String]()
