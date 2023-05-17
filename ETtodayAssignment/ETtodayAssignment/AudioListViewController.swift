@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class AudioListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
