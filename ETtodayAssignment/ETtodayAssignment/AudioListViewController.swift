@@ -7,11 +7,6 @@
 
 import UIKit
 
-enum AudioListReminder: String {
-    case onError = "網路發生錯誤"
-    case onEmpty = "無相關結果，請重新搜尋"
-}
-
 final class AudioListViewController: UICollectionViewController {
     let searchBar = UISearchBar()
     let reminder = UILabel()

@@ -16,6 +16,7 @@
 		984A75092A14A57A00C14538 /* AudioLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984A75082A14A57A00C14538 /* AudioLoader.swift */; };
 		984A750B2A14AB1D00C14538 /* AudioListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984A750A2A14AB1D00C14538 /* AudioListViewController.swift */; };
 		984A750D2A14BBD800C14538 /* AudioListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984A750C2A14BBD800C14538 /* AudioListCell.swift */; };
+		984A750F2A14BC0E00C14538 /* AudioListReminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984A750E2A14BC0E00C14538 /* AudioListReminder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +42,7 @@
 		984A75082A14A57A00C14538 /* AudioLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioLoader.swift; sourceTree = "<group>"; };
 		984A750A2A14AB1D00C14538 /* AudioListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioListViewController.swift; sourceTree = "<group>"; };
 		984A750C2A14BBD800C14538 /* AudioListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioListCell.swift; sourceTree = "<group>"; };
+		984A750E2A14BC0E00C14538 /* AudioListReminder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioListReminder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +89,7 @@
 				984A74DC2A14A18000C14538 /* ViewController.swift */,
 				984A75082A14A57A00C14538 /* AudioLoader.swift */,
 				984A750A2A14AB1D00C14538 /* AudioListViewController.swift */,
+				984A750E2A14BC0E00C14538 /* AudioListReminder.swift */,
 				984A750C2A14BBD800C14538 /* AudioListCell.swift */,
 				984A74E12A14A18100C14538 /* Assets.xcassets */,
 				984A74E32A14A18100C14538 /* LaunchScreen.storyboard */,
@@ -208,6 +211,7 @@
 				984A75092A14A57A00C14538 /* AudioLoader.swift in Sources */,
 				984A74D92A14A18000C14538 /* AppDelegate.swift in Sources */,
 				984A74DB2A14A18000C14538 /* SceneDelegate.swift in Sources */,
+				984A750F2A14BC0E00C14538 /* AudioListReminder.swift in Sources */,
 				984A750B2A14AB1D00C14538 /* AudioListViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
