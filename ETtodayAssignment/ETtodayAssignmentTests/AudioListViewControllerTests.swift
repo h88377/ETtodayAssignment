@@ -62,11 +62,24 @@ final class AudioListViewControllerTests: XCTestCase {
         XCTAssertTrue(sut.isShowingErrorReminder)
     }
     
+    func test_audioImageView_loadsImageURLWhenVisible() {
+        let imageURL = anyURL()
+        let audio = makeAudio(imageURL: imageURL)
+        let (sut, loader) = makeSUT()
+        sut.loadViewIfNeeded()
+        
+        sut.simulateInputKeyword(with: anyKeyword())
+        loader.completeSuccessfully(with: [audio])
+        
+        sut.simulateAudioImageViewIsVisible(at: 0)
+        XCTAssertEqual(loader.receivedURLs, [imageURL])
+    }
+    
     // MARK: - Helpers
     
     private func makeSUT(file: StaticString = #filePath, line: UInt = #line) -> (AudioListViewController, AudioLoaderSpy) {
         let loader = AudioLoaderSpy()
-        let sut = AudioListUIComposer.AudioUIComposedWith(audioLoader: loader)
+        let sut = AudioListUIComposer.AudioUIComposedWith(audioLoader: loader, imageDataLoader: loader)
         trackForMemoryLeak(sut, file: file, line: line)
         trackForMemoryLeak(loader, file: file, line: line)
         return (sut, loader)
@@ -109,7 +122,14 @@ final class AudioListViewControllerTests: XCTestCase {
         return NSError(domain: "any NSError", code: 0)
     }
     
-    private class AudioLoaderSpy: AudioLoader {
+    private func anyURL() -> URL {
+        return URL(string: "https://any-url.com")!
+    }
+    
+    private class AudioLoaderSpy: AudioLoader, AudioImageDataLoader {
+        
+        // MARK: - AudioLoader
+        
         private(set) var receivedKeywords = [String]()
         private var receivedCompletions = [(AudioLoader.Result) -> Void]()
         
@@ -125,13 +145,33 @@ final class AudioListViewControllerTests: XCTestCase {
         func complete(with error: Error, at index: Int = 0) {
             receivedCompletions[index](.failure(error))
         }
+        
+        // MARK: - AudioImageDataLoader
+        
+        private(set) var receivedURLs = [URL]()
+        
+        func loadImageData(from url: URL, completion: @escaping (AudioImageDataLoader.Result) -> Void) {
+            receivedURLs.append(url)
+        }
     }
 }
 
 private extension AudioListViewController {
+    public override func loadViewIfNeeded() {
+        super.loadViewIfNeeded()
+        
+        // To prevent diffable data source invoke cellForRowAt once it had enough space
+        collectionView.frame = .init(x: 0, y: 1, width: 1, height: 1)
+    }
+    
     func simulateInputKeyword(with keyword: String) {
         let delegate = searchBar.delegate
         delegate?.searchBar?(searchBar, textDidChange: keyword)
+    }
+    
+    func simulateAudioImageViewIsVisible(at index: Int) {
+        let dataSource = collectionView.dataSource
+        dataSource?.collectionView(collectionView, cellForItemAt: IndexPath(item: index, section: audioSection))
     }
     
     func itemAt(index: Int) -> UICollectionViewCell? {

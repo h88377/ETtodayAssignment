@@ -12,13 +12,13 @@ final class AudioListUIComposer {
     private init() {}
     private static let disposeBag = DisposeBag()
     
-    static func AudioUIComposedWith(audioLoader: AudioLoader) -> AudioListViewController {
+    static func AudioUIComposedWith(audioLoader: AudioLoader, imageDataLoader: AudioImageDataLoader) -> AudioListViewController {
         let viewModel = AudioListViewModel(audioLoader: audioLoader)
         let controller = AudioListViewController(viewModel: viewModel)
         
         viewModel.audios
             .subscribe(onNext: { [weak controller] audios in
-                let cellControllers = audios.map { AudioListCellViewController(audio: $0) }
+                let cellControllers = audios.map { AudioListCellViewController(audio: $0, viewModel: AudioListCellViewModel(imageDataLoader: imageDataLoader)) }
                 controller?.set(audios: cellControllers)
                 controller?.collectionView.isHidden = audios.isEmpty
             }).disposed(by: disposeBag)
