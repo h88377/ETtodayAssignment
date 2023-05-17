@@ -9,11 +9,7 @@ import UIKit
 import RxCocoa
 import RxSwift
 
-protocol AudioImageDataLoader {
-    typealias Result = Swift.Result<Data, Error>
-    
-    func loadImageData(from url: URL, completion: @escaping (Result) -> Void)
-}
+
 
 final class AudioListCellViewModel<Image> {
     let image = PublishRelay<Image>()
