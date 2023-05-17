@@ -15,6 +15,7 @@ final class AudioListCell: UICollectionViewCell {
 
 enum AudioListReminder: String {
     case onError = "網路發生錯誤"
+    case onEmpty = "無相關結果，請重新搜尋"
 }
 
 final class AudioListViewController: UICollectionViewController {
@@ -66,9 +67,15 @@ final class AudioListViewController: UICollectionViewController {
 extension AudioListViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         audioLoader.loadAudio(with: searchText) { [weak self] result in
-            if let audios = try? result.get() {
+            switch result {
+            case let .success(audios):
                 self?.set(audios: audios)
-            } else {
+                self?.collectionView.isHidden = audios.isEmpty
+                
+                if audios.isEmpty {
+                    self?.setReminder(.onEmpty)
+                }
+            case .failure:
                 self?.collectionView.isHidden = true
                 self?.setReminder(.onError)
             }

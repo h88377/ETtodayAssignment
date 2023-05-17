@@ -31,8 +31,10 @@ final class AudioListViewControllerTests: XCTestCase {
     func test_inputKeywordCompletions_rendersSuccessfulyAudios() {
         let firstKeyword = "keywordOne"
         let secondKeyword = "keywordTwo"
+        let thirdKeyword = "keywordThree"
         let firstAudios = [makeAudio()]
         let secondAudios = [makeAudio(), makeAudio(longDescription: "longDescription")]
+        let emptyAuduo = [Audio]()
         let (sut, loader) = makeSUT()
         sut.loadViewIfNeeded()
         
@@ -43,6 +45,11 @@ final class AudioListViewControllerTests: XCTestCase {
         sut.simulateInputKeyword(with: secondKeyword)
         loader.completeSuccessfully(with: secondAudios)
         assertThat(sut, isRendering: secondAudios)
+        
+        sut.simulateInputKeyword(with: thirdKeyword)
+        loader.completeSuccessfully(with: emptyAuduo)
+        assertThat(sut, isRendering: emptyAuduo)
+        XCTAssertTrue(sut.isShowingEmptyReminder)
     }
     
     func test_inputKeywordCompletions_showsErrorReminderOnError() {
@@ -139,6 +146,10 @@ private extension AudioListViewController {
     
     var isShowingErrorReminder: Bool {
         return collectionView.isHidden && reminder.text == AudioListReminder.onError.rawValue
+    }
+    
+    var isShowingEmptyReminder: Bool {
+        return collectionView.isHidden && reminder.text == AudioListReminder.onEmpty.rawValue
     }
     
     private var audioSection: Int { return 0 }
