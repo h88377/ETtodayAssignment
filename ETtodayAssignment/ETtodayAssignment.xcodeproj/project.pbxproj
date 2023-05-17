@@ -109,10 +109,9 @@
 		984A75102A14BC2700C14538 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				984A750A2A14AB1D00C14538 /* AudioListViewController.swift */,
-				984A75122A14C84000C14538 /* AudioListCellViewController.swift */,
-				984A750C2A14BBD800C14538 /* AudioListCell.swift */,
-				984A750E2A14BC0E00C14538 /* AudioListReminder.swift */,
+				984A75162A14C8F800C14538 /* Helper */,
+				984A75142A14C8E300C14538 /* Controller */,
+				984A75152A14C8ED00C14538 /* View */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -123,6 +122,31 @@
 				984A75082A14A57A00C14538 /* AudioLoader.swift */,
 			);
 			path = Feature;
+			sourceTree = "<group>";
+		};
+		984A75142A14C8E300C14538 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				984A750A2A14AB1D00C14538 /* AudioListViewController.swift */,
+				984A75122A14C84000C14538 /* AudioListCellViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		984A75152A14C8ED00C14538 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				984A750C2A14BBD800C14538 /* AudioListCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		984A75162A14C8F800C14538 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				984A750E2A14BC0E00C14538 /* AudioListReminder.swift */,
+			);
+			path = Helper;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
