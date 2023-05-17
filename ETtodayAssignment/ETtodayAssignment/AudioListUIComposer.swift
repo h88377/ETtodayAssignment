@@ -18,7 +18,7 @@ final class AudioListUIComposer {
         
         viewModel.audios
             .subscribe(onNext: { [weak controller] audios in
-                let cellControllers = audios.map { AudioListCellViewController(audio: $0, viewModel: AudioListCellViewModel(imageDataLoader: imageDataLoader)) }
+                let cellControllers = audios.map { AudioListCellViewController(audio: $0, viewModel: AudioListCellViewModel(imageDataLoader: imageDataLoader, imageTransformer: UIImage.init)) }
                 controller?.set(audios: cellControllers)
                 controller?.collectionView.isHidden = audios.isEmpty
             }).disposed(by: disposeBag)

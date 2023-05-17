@@ -75,6 +75,23 @@ final class AudioListViewControllerTests: XCTestCase {
         XCTAssertEqual(loader.receivedURLs, [imageURL])
     }
     
+    func test_audioImageView_rendersSuccessfullyLoadedImage() {
+        let audio = makeAudio(imageURL: anyURL())
+        let (sut, loader) = makeSUT()
+        sut.loadViewIfNeeded()
+        
+        sut.simulateInputKeyword(with: anyKeyword())
+        loader.completeSuccessfully(with: [audio])
+        
+        let view = sut.simulateAudioImageViewIsVisible(at: 0)
+        XCTAssertNil(view?.renderedImageData)
+        
+        let imageData = UIImage.make(withColor: .red).pngData()!
+        loader.completeImageDataSuccessfully(with: imageData)
+        
+        XCTAssertEqual(view?.renderedImageData, imageData)
+    }
+    
     // MARK: - Helpers
     
     private func makeSUT(file: StaticString = #filePath, line: UInt = #line) -> (AudioListViewController, AudioLoaderSpy) {
@@ -149,9 +166,15 @@ final class AudioListViewControllerTests: XCTestCase {
         // MARK: - AudioImageDataLoader
         
         private(set) var receivedURLs = [URL]()
+        private var receivedImageCompletions = [(AudioImageDataLoader.Result) -> Void]()
         
         func loadImageData(from url: URL, completion: @escaping (AudioImageDataLoader.Result) -> Void) {
             receivedURLs.append(url)
+            receivedImageCompletions.append(completion)
+        }
+        
+        func completeImageDataSuccessfully(with data: Data, at index: Int = 0) {
+            receivedImageCompletions[index](.success(data))
         }
     }
 }
@@ -169,9 +192,11 @@ private extension AudioListViewController {
         delegate?.searchBar?(searchBar, textDidChange: keyword)
     }
     
-    func simulateAudioImageViewIsVisible(at index: Int) {
+    @discardableResult
+    func simulateAudioImageViewIsVisible(at index: Int) -> AudioListCell? {
         let dataSource = collectionView.dataSource
-        dataSource?.collectionView(collectionView, cellForItemAt: IndexPath(item: index, section: audioSection))
+        let view = dataSource?.collectionView(collectionView, cellForItemAt: IndexPath(item: index, section: audioSection))
+        return view as? AudioListCell
     }
     
     func itemAt(index: Int) -> UICollectionViewCell? {
@@ -193,4 +218,23 @@ private extension AudioListViewController {
     }
     
     private var audioSection: Int { return 0 }
+}
+
+private extension AudioListCell {
+    var renderedImageData: Data? {
+        return audioImageView.image?.pngData()
+    }
+}
+
+private extension UIImage {
+    static func make(withColor color: UIColor) -> UIImage {
+        let rect = CGRect(x: 0, y: 0, width: 1, height: 1)
+        let format = UIGraphicsImageRendererFormat()
+        format.scale = 1
+        
+        return UIGraphicsImageRenderer(size: rect.size, format: format).image { rendererContext in
+            color.setFill()
+            rendererContext.fill(rect)
+        }
+    }
 }

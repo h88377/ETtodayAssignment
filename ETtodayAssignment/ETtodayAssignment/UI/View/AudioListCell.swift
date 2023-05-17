@@ -11,4 +11,5 @@ final class AudioListCell: UICollectionViewCell {
     static let identifier = "\(AudioListCell.self)"
     
     let longDescriptionLabel = UILabel()
+    let audioImageView = UIImageView()
 }

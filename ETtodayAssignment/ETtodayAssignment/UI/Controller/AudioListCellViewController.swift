@@ -7,6 +7,7 @@
 
 import UIKit
 import RxCocoa
+import RxSwift
 
 protocol AudioImageDataLoader {
     typealias Result = Swift.Result<Data, Error>
@@ -14,26 +15,32 @@ protocol AudioImageDataLoader {
     func loadImageData(from url: URL, completion: @escaping (Result) -> Void)
 }
 
-final class AudioListCellViewModel {
-    let imageData = PublishRelay<Data>()
+final class AudioListCellViewModel<Image> {
+    let image = PublishRelay<Image>()
     private let imageDataLoader: AudioImageDataLoader
+    private let imageTransformer: (Data) -> Image?
     
-    init(imageDataLoader: AudioImageDataLoader) {
+    init(imageDataLoader: AudioImageDataLoader, imageTransformer: @escaping (Data) -> Image?) {
         self.imageDataLoader = imageDataLoader
+        self.imageTransformer = imageTransformer
     }
     
     func requestImageData(with url: URL) {
-        imageDataLoader.loadImageData(from: url) { _ in
+        imageDataLoader.loadImageData(from: url) { [weak self] result in
+            if let data = try? result.get(), let image = self?.imageTransformer(data) {
+                self?.image.accept(image)
+            }
         }
     }
 }
 
 final class AudioListCellViewController {
     private let id = UUID()
+    private let disposeBag = DisposeBag()
     private let audio: Audio
-    private let viewModel: AudioListCellViewModel
+    private let viewModel: AudioListCellViewModel<UIImage>
     
-    init(audio: Audio, viewModel: AudioListCellViewModel) {
+    init(audio: Audio, viewModel: AudioListCellViewModel<UIImage>) {
         self.audio = audio
         self.viewModel = viewModel
     }
@@ -42,6 +49,11 @@ final class AudioListCellViewController {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AudioListCell.identifier, for: indexPath) as? AudioListCell else { return UICollectionViewCell() }
         
         viewModel.requestImageData(with: audio.imageURL)
+        viewModel.image
+            .subscribe(onNext: { [weak cell] image in
+                cell?.audioImageView.image = image
+            }).disposed(by: disposeBag)
+        
         cell.longDescriptionLabel.text = audio.longDescription
         return cell
     }
