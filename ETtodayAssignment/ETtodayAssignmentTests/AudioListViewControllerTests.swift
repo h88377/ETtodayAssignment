@@ -10,6 +10,7 @@ import XCTest
 
 class AudioListViewController: UIViewController {
     private let audioLoader: AudioLoader
+    let searchBar = UISearchBar()
     
     init(audioLoader: AudioLoader) {
         self.audioLoader = audioLoader
@@ -23,9 +24,14 @@ class AudioListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        searchBar.delegate = self
     }
+}
 
-
+extension AudioListViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        audioLoader.loadAudio(with: searchText)
+    }
 }
 
 final class AudioListViewControllerTests: XCTestCase {
@@ -34,6 +40,18 @@ final class AudioListViewControllerTests: XCTestCase {
         let (_, loader) = makeSUT()
         
         XCTAssertEqual(loader.receivedKeywords, [])
+    }
+    
+    func test_inputKeywordActions_requestAudioesWithKeyword() {
+        let firstKeyword = "keywordOne"
+        let secondKeyword = "keywordOne"
+        let (sut, loader) = makeSUT()
+        sut.loadViewIfNeeded()
+        
+        sut.simulateInputKeyword(with: firstKeyword)
+        sut.simulateInputKeyword(with: secondKeyword)
+        
+        XCTAssertEqual(loader.receivedKeywords, [firstKeyword, secondKeyword])
     }
     
     // MARK: - Helpers
@@ -58,5 +76,12 @@ final class AudioListViewControllerTests: XCTestCase {
         func loadAudio(with keyword: String) {
             receivedKeywords.append(keyword)
         }
+    }
+}
+
+private extension AudioListViewController {
+    func simulateInputKeyword(with keyword: String) {
+        let delegate = searchBar.delegate
+        delegate?.searchBar?(searchBar, textDidChange: keyword)
     }
 }
