@@ -20,6 +20,7 @@
 		984A750F2A14BC0E00C14538 /* AudioListReminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984A750E2A14BC0E00C14538 /* AudioListReminder.swift */; };
 		984A75132A14C84000C14538 /* AudioListCellViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984A75122A14C84000C14538 /* AudioListCellViewController.swift */; };
 		984A751A2A14D93400C14538 /* AudioListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984A75192A14D93400C14538 /* AudioListViewModel.swift */; };
+		984A751C2A14D97A00C14538 /* AudioListUIComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984A751B2A14D97A00C14538 /* AudioListUIComposer.swift */; };
 		BACCD65F7F90439D0F7E6A46 /* Pods_ETtodayAssignmentTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A79D92C9B5F4A6EEF92777C /* Pods_ETtodayAssignmentTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -55,6 +56,7 @@
 		984A750E2A14BC0E00C14538 /* AudioListReminder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioListReminder.swift; sourceTree = "<group>"; };
 		984A75122A14C84000C14538 /* AudioListCellViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioListCellViewController.swift; sourceTree = "<group>"; };
 		984A75192A14D93400C14538 /* AudioListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioListViewModel.swift; sourceTree = "<group>"; };
+		984A751B2A14D97A00C14538 /* AudioListUIComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioListUIComposer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 			children = (
 				984A74D82A14A18000C14538 /* AppDelegate.swift */,
 				984A74DA2A14A18000C14538 /* SceneDelegate.swift */,
+				984A751B2A14D97A00C14538 /* AudioListUIComposer.swift */,
 				984A74DC2A14A18000C14538 /* ViewController.swift */,
 				984A75112A14BC4500C14538 /* Feature */,
 				984A75102A14BC2700C14538 /* UI */,
@@ -361,6 +364,7 @@
 			files = (
 				984A750D2A14BBD800C14538 /* AudioListCell.swift in Sources */,
 				984A74DD2A14A18000C14538 /* ViewController.swift in Sources */,
+				984A751C2A14D97A00C14538 /* AudioListUIComposer.swift in Sources */,
 				984A75092A14A57A00C14538 /* AudioLoader.swift in Sources */,
 				984A75132A14C84000C14538 /* AudioListCellViewController.swift in Sources */,
 				984A74D92A14A18000C14538 /* AppDelegate.swift in Sources */,
