@@ -34,32 +34,6 @@ final class AudioListUIComposer {
     }
 }
 
-final class AudioListViewModel {
-    let audios = PublishRelay<[Audio]>()
-    let reminder = PublishRelay<AudioListReminder>()
-    
-    private let audioLoader: AudioLoader
-    
-    init(audioLoader: AudioLoader) {
-        self.audioLoader = audioLoader
-    }
-    
-    func loadAudios(with keyword: String) {
-        audioLoader.loadAudio(with: keyword) { [weak self] result in
-            switch result {
-            case let .success(audios):
-                if audios.isEmpty {
-                    self?.reminder.accept(.onEmpty)
-                }
-                self?.audios.accept(audios)
-                
-            case .failure:
-                self?.reminder.accept(.onError)
-            }
-        }
-    }
-}
-
 final class AudioListViewController: UICollectionViewController {
     let searchBar = UISearchBar()
     let reminder = UILabel()

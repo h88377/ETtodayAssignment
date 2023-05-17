@@ -19,6 +19,7 @@
 		984A750D2A14BBD800C14538 /* AudioListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984A750C2A14BBD800C14538 /* AudioListCell.swift */; };
 		984A750F2A14BC0E00C14538 /* AudioListReminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984A750E2A14BC0E00C14538 /* AudioListReminder.swift */; };
 		984A75132A14C84000C14538 /* AudioListCellViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984A75122A14C84000C14538 /* AudioListCellViewController.swift */; };
+		984A751A2A14D93400C14538 /* AudioListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984A75192A14D93400C14538 /* AudioListViewModel.swift */; };
 		BACCD65F7F90439D0F7E6A46 /* Pods_ETtodayAssignmentTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A79D92C9B5F4A6EEF92777C /* Pods_ETtodayAssignmentTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -53,6 +54,7 @@
 		984A750C2A14BBD800C14538 /* AudioListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioListCell.swift; sourceTree = "<group>"; };
 		984A750E2A14BC0E00C14538 /* AudioListReminder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioListReminder.swift; sourceTree = "<group>"; };
 		984A75122A14C84000C14538 /* AudioListCellViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioListCellViewController.swift; sourceTree = "<group>"; };
+		984A75192A14D93400C14538 /* AudioListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioListViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				984A75162A14C8F800C14538 /* Helper */,
+				984A75182A14D92F00C14538 /* ViewModel */,
 				984A75142A14C8E300C14538 /* Controller */,
 				984A75152A14C8ED00C14538 /* View */,
 			);
@@ -159,6 +162,14 @@
 				984A750E2A14BC0E00C14538 /* AudioListReminder.swift */,
 			);
 			path = Helper;
+			sourceTree = "<group>";
+		};
+		984A75182A14D92F00C14538 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				984A75192A14D93400C14538 /* AudioListViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		D2B9BD2ADE76FB11FBEA36EE /* Frameworks */ = {
@@ -353,6 +364,7 @@
 				984A75092A14A57A00C14538 /* AudioLoader.swift in Sources */,
 				984A75132A14C84000C14538 /* AudioListCellViewController.swift in Sources */,
 				984A74D92A14A18000C14538 /* AppDelegate.swift in Sources */,
+				984A751A2A14D93400C14538 /* AudioListViewModel.swift in Sources */,
 				984A74DB2A14A18000C14538 /* SceneDelegate.swift in Sources */,
 				984A750F2A14BC0E00C14538 /* AudioListReminder.swift in Sources */,
 				984A750B2A14AB1D00C14538 /* AudioListViewController.swift in Sources */,
