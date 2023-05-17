@@ -45,6 +45,16 @@ final class AudioListViewControllerTests: XCTestCase {
         assertThat(sut, isRendering: secondAudios)
     }
     
+    func test_inputKeywordCompletions_showsErrorReminderOnError() {
+        let (sut, loader) = makeSUT()
+        sut.loadViewIfNeeded()
+        
+        sut.simulateInputKeyword(with: anyKeyword())
+        loader.complete(with: anyNSError())
+        
+        XCTAssertTrue(sut.isShowingErrorReminder)
+    }
+    
     // MARK: - Helpers
     
     private func makeSUT(file: StaticString = #filePath, line: UInt = #line) -> (AudioListViewController, AudioLoaderSpy) {
@@ -84,6 +94,14 @@ final class AudioListViewControllerTests: XCTestCase {
         return Audio(imageURL: imageURL, previewURL: previewURL, longDescription: longDescription)
     }
     
+    private func anyKeyword() -> String {
+        return "anyKeyword"
+    }
+    
+    private func anyNSError() -> NSError {
+        return NSError(domain: "any NSError", code: 0)
+    }
+    
     private class AudioLoaderSpy: AudioLoader {
         private(set) var receivedKeywords = [String]()
         private var receivedCompletions = [(AudioLoader.Result) -> Void]()
@@ -95,6 +113,10 @@ final class AudioListViewControllerTests: XCTestCase {
         
         func completeSuccessfully(with audios: [Audio], at index: Int = 0) {
             receivedCompletions[index](.success(audios))
+        }
+        
+        func complete(with error: Error, at index: Int = 0) {
+            receivedCompletions[index](.failure(error))
         }
     }
 }
@@ -113,6 +135,10 @@ private extension AudioListViewController {
     var numberOfAudios: Int {
         let dataSource = collectionView.dataSource!
         return dataSource.collectionView(collectionView, numberOfItemsInSection: audioSection)
+    }
+    
+    var isShowingErrorReminder: Bool {
+        return collectionView.isHidden && reminder.text == AudioListReminder.onError.rawValue
     }
     
     private var audioSection: Int { return 0 }

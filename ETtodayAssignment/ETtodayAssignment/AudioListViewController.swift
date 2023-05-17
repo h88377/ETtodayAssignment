@@ -13,14 +13,23 @@ final class AudioListCell: UICollectionViewCell {
     let longDescriptionLabel = UILabel()
 }
 
+enum AudioListReminder: String {
+    case onError = "網路發生錯誤"
+}
+
 final class AudioListViewController: UICollectionViewController {
     let searchBar = UISearchBar()
+    let reminder = UILabel()
     
     func set(audios: [Audio]) {
         var snapshot = NSDiffableDataSourceSnapshot<Int, Audio>()
         snapshot.appendSections([audioSection])
         snapshot.appendItems(audios)
         dataSource.apply(snapshot, animatingDifferences: false)
+    }
+    
+    private func setReminder(_ type: AudioListReminder) {
+        reminder.text = type.rawValue
     }
     
     private var audioSection: Int { return 0 }
@@ -59,6 +68,9 @@ extension AudioListViewController: UISearchBarDelegate {
         audioLoader.loadAudio(with: searchText) { [weak self] result in
             if let audios = try? result.get() {
                 self?.set(audios: audios)
+            } else {
+                self?.collectionView.isHidden = true
+                self?.setReminder(.onError)
             }
         }
     }
