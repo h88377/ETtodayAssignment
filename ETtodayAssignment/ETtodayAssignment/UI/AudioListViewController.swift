@@ -7,12 +7,38 @@
 
 import UIKit
 
+final class AudioListCellViewController {
+    private let id = UUID()
+    private let audio: Audio
+    
+    init(audio: Audio) {
+        self.audio = audio
+    }
+    
+    func view(in collectionView: UICollectionView, indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AudioListCell.identifier, for: indexPath) as? AudioListCell else { return UICollectionViewCell() }
+        
+        cell.longDescriptionLabel.text = audio.longDescription
+        return cell
+    }
+}
+
+extension AudioListCellViewController: Hashable {
+    static func == (lhs: AudioListCellViewController, rhs: AudioListCellViewController) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+      hasher.combine(id)
+    }
+}
+
 final class AudioListViewController: UICollectionViewController {
     let searchBar = UISearchBar()
     let reminder = UILabel()
     
-    func set(audios: [Audio]) {
-        var snapshot = NSDiffableDataSourceSnapshot<Int, Audio>()
+    func set(audios: [AudioListCellViewController]) {
+        var snapshot = NSDiffableDataSourceSnapshot<Int, AudioListCellViewController>()
         snapshot.appendSections([audioSection])
         snapshot.appendItems(audios)
         dataSource.apply(snapshot, animatingDifferences: false)
@@ -24,12 +50,9 @@ final class AudioListViewController: UICollectionViewController {
     
     private var audioSection: Int { return 0 }
     
-    private lazy var dataSource: UICollectionViewDiffableDataSource<Int, Audio> = {
-        .init(collectionView: collectionView) { [weak self] collectionView, indexPath, audio in
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AudioListCell.identifier, for: indexPath) as? AudioListCell else { return UICollectionViewCell() }
-            
-            cell.longDescriptionLabel.text = audio.longDescription
-            return cell
+    private lazy var dataSource: UICollectionViewDiffableDataSource<Int, AudioListCellViewController> = {
+        .init(collectionView: collectionView) { [weak self] collectionView, indexPath, controller in
+            return controller.view(in: collectionView, indexPath: indexPath)
         }
     }()
     
@@ -58,7 +81,8 @@ extension AudioListViewController: UISearchBarDelegate {
         audioLoader.loadAudio(with: searchText) { [weak self] result in
             switch result {
             case let .success(audios):
-                self?.set(audios: audios)
+                let controllers = audios.map { AudioListCellViewController(audio: $0) }
+                self?.set(audios: controllers)
                 self?.collectionView.isHidden = audios.isEmpty
                 
                 if audios.isEmpty {
