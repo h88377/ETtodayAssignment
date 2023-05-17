@@ -66,7 +66,7 @@ final class AudioListViewControllerTests: XCTestCase {
     
     private func makeSUT(file: StaticString = #filePath, line: UInt = #line) -> (AudioListViewController, AudioLoaderSpy) {
         let loader = AudioLoaderSpy()
-        let sut = AudioListViewController(audioLoader: loader)
+        let sut = AudioListUIComposer.AudioUIComposedWith(audioLoader: loader)
         trackForMemoryLeak(sut, file: file, line: line)
         trackForMemoryLeak(loader, file: file, line: line)
         return (sut, loader)
