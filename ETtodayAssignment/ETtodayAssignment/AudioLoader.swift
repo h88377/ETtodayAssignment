@@ -7,6 +7,14 @@
 
 import Foundation
 
+struct Audio: Hashable {
+    let imageURL: URL
+    let previewURL: URL
+    var longDescription: String?
+}
+
 protocol AudioLoader {
-    func loadAudio(with keyword: String)
+    typealias Result = Swift.Result<[Audio], Error>
+    
+    func loadAudio(with keyword: String, completion: @escaping (Result) -> Void)
 }
