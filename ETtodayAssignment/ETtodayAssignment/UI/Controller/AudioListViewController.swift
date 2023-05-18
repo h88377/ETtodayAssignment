@@ -52,6 +52,7 @@ final class AudioListViewController: UIViewController {
         super.viewDidLoad()
         
         setUpUI()
+        view.backgroundColor = .white
         searchBar.delegate = self
         collectionView.delegate = self
         collectionView.dataSource = dataSource
@@ -75,7 +76,8 @@ final class AudioListViewController: UIViewController {
         view.insertSubview(reminder, belowSubview: collectionView)
         
         searchBar.snp.makeConstraints { make in
-            make.leading.trailing.top.equalToSuperview()
+            make.leading.trailing.equalToSuperview()
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
         }
         
         collectionView.snp.makeConstraints { make in
