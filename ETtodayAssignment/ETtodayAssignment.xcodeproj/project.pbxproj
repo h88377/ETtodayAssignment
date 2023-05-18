@@ -26,6 +26,7 @@
 		984A75232A15C57900C14538 /* TestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984A75222A15C57900C14538 /* TestHelper.swift */; };
 		984A75252A15FE5500C14538 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984A75242A15FE5500C14538 /* AudioPlayer.swift */; };
 		984A75272A160A7B00C14538 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984A75262A160A7B00C14538 /* UIView+Extension.swift */; };
+		984A752B2A16110E00C14538 /* RemoteAudioLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984A752A2A16110E00C14538 /* RemoteAudioLoader.swift */; };
 		BACCD65F7F90439D0F7E6A46 /* Pods_ETtodayAssignmentTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A79D92C9B5F4A6EEF92777C /* Pods_ETtodayAssignmentTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -67,6 +68,7 @@
 		984A75222A15C57900C14538 /* TestHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelper.swift; sourceTree = "<group>"; };
 		984A75242A15FE5500C14538 /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
 		984A75262A160A7B00C14538 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		984A752A2A16110E00C14538 /* RemoteAudioLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteAudioLoader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +118,7 @@
 				984A74DA2A14A18000C14538 /* SceneDelegate.swift */,
 				984A751B2A14D97A00C14538 /* AudioListUIComposer.swift */,
 				984A74DC2A14A18000C14538 /* ViewController.swift */,
+				984A75282A1610E000C14538 /* API */,
 				984A75112A14BC4500C14538 /* Feature */,
 				984A75102A14BC2700C14538 /* UI */,
 				984A74E12A14A18100C14538 /* Assets.xcassets */,
@@ -196,6 +199,14 @@
 				984A75222A15C57900C14538 /* TestHelper.swift */,
 			);
 			path = Helper;
+			sourceTree = "<group>";
+		};
+		984A75282A1610E000C14538 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				984A752A2A16110E00C14538 /* RemoteAudioLoader.swift */,
+			);
+			path = API;
 			sourceTree = "<group>";
 		};
 		D2B9BD2ADE76FB11FBEA36EE /* Frameworks */ = {
@@ -392,6 +403,7 @@
 				984A751E2A14E22500C14538 /* AudioImageDataLoader.swift in Sources */,
 				984A75092A14A57A00C14538 /* AudioLoader.swift in Sources */,
 				984A75132A14C84000C14538 /* AudioListCellViewController.swift in Sources */,
+				984A752B2A16110E00C14538 /* RemoteAudioLoader.swift in Sources */,
 				984A74D92A14A18000C14538 /* AppDelegate.swift in Sources */,
 				984A75272A160A7B00C14538 /* UIView+Extension.swift in Sources */,
 				984A751A2A14D93400C14538 /* AudioListViewModel.swift in Sources */,
