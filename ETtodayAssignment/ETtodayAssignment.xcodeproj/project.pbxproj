@@ -34,6 +34,7 @@
 		984A75352A16138D00C14538 /* URLSessionHTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984A75342A16138D00C14538 /* URLSessionHTTPClient.swift */; };
 		984A75372A1614A900C14538 /* RemoteAudioImageDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984A75362A1614A900C14538 /* RemoteAudioImageDataLoader.swift */; };
 		984A75392A161F0300C14538 /* KingfisherImageHTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984A75382A161F0300C14538 /* KingfisherImageHTTPClient.swift */; };
+		984A753C2A16209900C14538 /* AVPlayerAudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984A753B2A16209900C14538 /* AVPlayerAudioPlayer.swift */; };
 		BACCD65F7F90439D0F7E6A46 /* Pods_ETtodayAssignmentTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A79D92C9B5F4A6EEF92777C /* Pods_ETtodayAssignmentTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -83,6 +84,7 @@
 		984A75342A16138D00C14538 /* URLSessionHTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPClient.swift; sourceTree = "<group>"; };
 		984A75362A1614A900C14538 /* RemoteAudioImageDataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteAudioImageDataLoader.swift; sourceTree = "<group>"; };
 		984A75382A161F0300C14538 /* KingfisherImageHTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KingfisherImageHTTPClient.swift; sourceTree = "<group>"; };
+		984A753B2A16209900C14538 /* AVPlayerAudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVPlayerAudioPlayer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +134,7 @@
 				984A74DA2A14A18000C14538 /* SceneDelegate.swift */,
 				984A751B2A14D97A00C14538 /* AudioListUIComposer.swift */,
 				984A74DC2A14A18000C14538 /* ViewController.swift */,
+				984A753A2A16203D00C14538 /* StreamingLayer */,
 				984A75282A1610E000C14538 /* API */,
 				984A75112A14BC4500C14538 /* Feature */,
 				984A75102A14BC2700C14538 /* UI */,
@@ -228,6 +231,14 @@
 				984A75362A1614A900C14538 /* RemoteAudioImageDataLoader.swift */,
 			);
 			path = API;
+			sourceTree = "<group>";
+		};
+		984A753A2A16203D00C14538 /* StreamingLayer */ = {
+			isa = PBXGroup;
+			children = (
+				984A753B2A16209900C14538 /* AVPlayerAudioPlayer.swift */,
+			);
+			path = StreamingLayer;
 			sourceTree = "<group>";
 		};
 		D2B9BD2ADE76FB11FBEA36EE /* Frameworks */ = {
@@ -419,6 +430,7 @@
 			files = (
 				984A750D2A14BBD800C14538 /* AudioListCell.swift in Sources */,
 				984A75202A14E26200C14538 /* AudioListCellViewModel.swift in Sources */,
+				984A753C2A16209900C14538 /* AVPlayerAudioPlayer.swift in Sources */,
 				984A74DD2A14A18000C14538 /* ViewController.swift in Sources */,
 				984A751C2A14D97A00C14538 /* AudioListUIComposer.swift in Sources */,
 				984A75392A161F0300C14538 /* KingfisherImageHTTPClient.swift in Sources */,
