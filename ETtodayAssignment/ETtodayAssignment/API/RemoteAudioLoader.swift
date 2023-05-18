@@ -7,12 +7,6 @@
 
 import Foundation
 
-struct RemoteAudio: Decodable {
-    let imageURL: URL
-    let previewURL: URL
-    var longDescription: String?
-}
-
 final class AudiosMapper {
     private init() {}
     
