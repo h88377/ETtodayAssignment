@@ -7,16 +7,34 @@
 
 import UIKit
 
-final class AudioListViewController: UICollectionViewController {
-    let searchBar = UISearchBar()
-    let reminder = UILabel()
+final class AudioListViewController: UIViewController {
+    let searchBar: UISearchBar = {
+        let searchBar = UISearchBar()
+        
+        searchBar.translatesAutoresizingMaskIntoConstraints = false
+        return searchBar
+    }()
+    
+    let reminder: UILabel = {
+        let label = UILabel()
+        
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    let collectionView: UICollectionView = {
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: .init())
+        
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        return collectionView
+    }()
     
     private var selectedCellController: AudioListCellViewController?
     private let viewModel: AudioListViewModel
     
     init(viewModel: AudioListViewModel) {
         self.viewModel = viewModel
-        super.init(collectionViewLayout: .init())
+        super.init(nibName: nil, bundle: nil)
     }
     
     private var audioSection: Int { return 0 }
@@ -33,8 +51,11 @@ final class AudioListViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setUpUI()
         searchBar.delegate = self
+        collectionView.delegate = self
         collectionView.dataSource = dataSource
+        collectionView.collectionViewLayout = configureCollectionViewLayout()
         collectionView.register(AudioListCell.self, forCellWithReuseIdentifier: AudioListCell.identifier)
     }
     
@@ -49,6 +70,36 @@ final class AudioListViewController: UICollectionViewController {
         reminder.text = type.rawValue
     }
     
+    private func setUpUI() {
+        view.addSubviews([collectionView, searchBar])
+        view.insertSubview(reminder, belowSubview: collectionView)
+        
+        searchBar.snp.makeConstraints { make in
+            make.leading.trailing.top.equalToSuperview()
+        }
+        
+        collectionView.snp.makeConstraints { make in
+            make.leading.trailing.bottom.equalToSuperview()
+            make.top.equalTo(searchBar.snp.bottom)
+        }
+        
+        reminder.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+        }
+    }
+    
+    private func configureCollectionViewLayout() -> UICollectionViewCompositionalLayout {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(50))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(50))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        
+        let section = NSCollectionLayoutSection(group: group)
+        
+        return UICollectionViewCompositionalLayout(section: section)
+    }
+    
     private func cellController(at index: Int) -> AudioListCellViewController {
         let snapshot = dataSource.snapshot()
         return snapshot.itemIdentifiers(inSection: audioSection)[index]
@@ -57,8 +108,8 @@ final class AudioListViewController: UICollectionViewController {
 
 // MARK: - UICollectionViewDelegate
 
-extension AudioListViewController {
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+extension AudioListViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if selectedCellController === cellController(at: indexPath.item) {
             cellController(at: indexPath.item).didSelect()
         } else {

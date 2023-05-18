@@ -9,13 +9,6 @@ import UIKit
 @testable import ETtodayAssignment
 
 extension AudioListViewController {
-    public override func loadViewIfNeeded() {
-        super.loadViewIfNeeded()
-        
-        // To prevent diffable data source invoke cellForRowAt once it had enough space
-        collectionView.frame = .init(x: 0, y: 1, width: 1, height: 1)
-    }
-    
     func simulateInputKeyword(with keyword: String) {
         let delegate = searchBar.delegate
         delegate?.searchBar?(searchBar, textDidChange: keyword)
