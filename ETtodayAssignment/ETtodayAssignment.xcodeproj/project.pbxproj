@@ -29,6 +29,7 @@
 		984A752B2A16110E00C14538 /* RemoteAudioLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984A752A2A16110E00C14538 /* RemoteAudioLoader.swift */; };
 		984A752D2A1612F500C14538 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984A752C2A1612F500C14538 /* HTTPClient.swift */; };
 		984A752F2A16130D00C14538 /* RemoteAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984A752E2A16130D00C14538 /* RemoteAudio.swift */; };
+		984A75312A16132C00C14538 /* AudiosMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984A75302A16132C00C14538 /* AudiosMapper.swift */; };
 		BACCD65F7F90439D0F7E6A46 /* Pods_ETtodayAssignmentTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A79D92C9B5F4A6EEF92777C /* Pods_ETtodayAssignmentTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -73,6 +74,7 @@
 		984A752A2A16110E00C14538 /* RemoteAudioLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteAudioLoader.swift; sourceTree = "<group>"; };
 		984A752C2A1612F500C14538 /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 		984A752E2A16130D00C14538 /* RemoteAudio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteAudio.swift; sourceTree = "<group>"; };
+		984A75302A16132C00C14538 /* AudiosMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudiosMapper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -209,6 +211,7 @@
 			isa = PBXGroup;
 			children = (
 				984A752A2A16110E00C14538 /* RemoteAudioLoader.swift */,
+				984A75302A16132C00C14538 /* AudiosMapper.swift */,
 				984A752E2A16130D00C14538 /* RemoteAudio.swift */,
 				984A752C2A1612F500C14538 /* HTTPClient.swift */,
 			);
@@ -407,6 +410,7 @@
 				984A74DD2A14A18000C14538 /* ViewController.swift in Sources */,
 				984A751C2A14D97A00C14538 /* AudioListUIComposer.swift in Sources */,
 				984A751E2A14E22500C14538 /* AudioImageDataLoader.swift in Sources */,
+				984A75312A16132C00C14538 /* AudiosMapper.swift in Sources */,
 				984A75092A14A57A00C14538 /* AudioLoader.swift in Sources */,
 				984A75132A14C84000C14538 /* AudioListCellViewController.swift in Sources */,
 				984A752F2A16130D00C14538 /* RemoteAudio.swift in Sources */,

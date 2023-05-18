@@ -7,20 +7,6 @@
 
 import Foundation
 
-final class AudiosMapper {
-    private init() {}
-    
-    private static var OK_200: Int { return 200 }
-    
-    static func map(with data: Data, _ response: HTTPURLResponse) throws -> [RemoteAudio] {
-        guard response.statusCode == OK_200, let remoteAudios = try? JSONDecoder().decode([RemoteAudio].self, from: data) else {
-            throw RemoteAudioLoader.Error.invalidData
-        }
-        
-        return remoteAudios
-    }
-}
-
 final class RemoteAudioLoader: AudioLoader {
     typealias Result = AudioLoader.Result
     
