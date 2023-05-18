@@ -27,6 +27,7 @@
 		984A75252A15FE5500C14538 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984A75242A15FE5500C14538 /* AudioPlayer.swift */; };
 		984A75272A160A7B00C14538 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984A75262A160A7B00C14538 /* UIView+Extension.swift */; };
 		984A752B2A16110E00C14538 /* RemoteAudioLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984A752A2A16110E00C14538 /* RemoteAudioLoader.swift */; };
+		984A752D2A1612F500C14538 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984A752C2A1612F500C14538 /* HTTPClient.swift */; };
 		BACCD65F7F90439D0F7E6A46 /* Pods_ETtodayAssignmentTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A79D92C9B5F4A6EEF92777C /* Pods_ETtodayAssignmentTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -69,6 +70,7 @@
 		984A75242A15FE5500C14538 /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
 		984A75262A160A7B00C14538 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		984A752A2A16110E00C14538 /* RemoteAudioLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteAudioLoader.swift; sourceTree = "<group>"; };
+		984A752C2A1612F500C14538 /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -205,6 +207,7 @@
 			isa = PBXGroup;
 			children = (
 				984A752A2A16110E00C14538 /* RemoteAudioLoader.swift */,
+				984A752C2A1612F500C14538 /* HTTPClient.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -406,6 +409,7 @@
 				984A752B2A16110E00C14538 /* RemoteAudioLoader.swift in Sources */,
 				984A74D92A14A18000C14538 /* AppDelegate.swift in Sources */,
 				984A75272A160A7B00C14538 /* UIView+Extension.swift in Sources */,
+				984A752D2A1612F500C14538 /* HTTPClient.swift in Sources */,
 				984A751A2A14D93400C14538 /* AudioListViewModel.swift in Sources */,
 				984A74DB2A14A18000C14538 /* SceneDelegate.swift in Sources */,
 				984A750F2A14BC0E00C14538 /* AudioListReminder.swift in Sources */,

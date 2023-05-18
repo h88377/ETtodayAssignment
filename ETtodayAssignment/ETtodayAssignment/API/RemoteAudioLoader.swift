@@ -7,12 +7,6 @@
 
 import Foundation
 
-protocol HTTPClient {
-    typealias Result = Swift.Result<(Data, HTTPURLResponse), Error>
-    
-    func dispatch(_ request: URLRequest, completion: @escaping (Result) -> Void)
-}
-
 struct RemoteAudio: Decodable {
     let imageURL: URL
     let previewURL: URL
