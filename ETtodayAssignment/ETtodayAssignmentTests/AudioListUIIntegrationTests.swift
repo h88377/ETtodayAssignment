@@ -131,6 +131,23 @@ final class AudioListUIIntegrationTests: XCTestCase {
         XCTAssertEqual(view1?.isShowingPauseView, true)
     }
     
+    func test_audioPlayView_showsPlayViewWhenTypingKeywords() {
+        let (sut, loader, _) = makeSUT()
+        sut.loadViewIfNeeded()
+        
+        sut.simulateInputKeyword(with: anyKeyword())
+        loader.completeSuccessfully(with: [makeAudio()])
+        
+        let view = sut.simulateAudioImageViewIsVisible(at: 0)
+        XCTAssertEqual(view?.isShowingPlayView, true)
+        
+        sut.simulateAudioImageViewSelected(at: 0)
+        XCTAssertEqual(view?.isShowingPauseView, true)
+        
+        sut.simulateInputKeyword(with: anyKeyword())
+        XCTAssertEqual(view?.isShowingPlayView, true)
+    }
+    
     func test_audioPlayView_showsPlayViewWhenFinishingPlaying() {
         let (sut, loader, player) = makeSUT()
         sut.loadViewIfNeeded()
