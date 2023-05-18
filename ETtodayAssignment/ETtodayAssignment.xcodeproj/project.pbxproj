@@ -23,7 +23,7 @@
 		984A751C2A14D97A00C14538 /* AudioListUIComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984A751B2A14D97A00C14538 /* AudioListUIComposer.swift */; };
 		984A751E2A14E22500C14538 /* AudioImageDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984A751D2A14E22500C14538 /* AudioImageDataLoader.swift */; };
 		984A75202A14E26200C14538 /* AudioListCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984A751F2A14E26200C14538 /* AudioListCellViewModel.swift */; };
-		984A75232A15C57900C14538 /* AudioListViewController+TestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984A75222A15C57900C14538 /* AudioListViewController+TestHelper.swift */; };
+		984A75232A15C57900C14538 /* TestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984A75222A15C57900C14538 /* TestHelper.swift */; };
 		BACCD65F7F90439D0F7E6A46 /* Pods_ETtodayAssignmentTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A79D92C9B5F4A6EEF92777C /* Pods_ETtodayAssignmentTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -62,7 +62,7 @@
 		984A751B2A14D97A00C14538 /* AudioListUIComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioListUIComposer.swift; sourceTree = "<group>"; };
 		984A751D2A14E22500C14538 /* AudioImageDataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioImageDataLoader.swift; sourceTree = "<group>"; };
 		984A751F2A14E26200C14538 /* AudioListCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioListCellViewModel.swift; sourceTree = "<group>"; };
-		984A75222A15C57900C14538 /* AudioListViewController+TestHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AudioListViewController+TestHelper.swift"; sourceTree = "<group>"; };
+		984A75222A15C57900C14538 /* TestHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -187,7 +187,7 @@
 		984A75212A15C56200C14538 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
-				984A75222A15C57900C14538 /* AudioListViewController+TestHelper.swift */,
+				984A75222A15C57900C14538 /* TestHelper.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -399,7 +399,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				984A74F02A14A18100C14538 /* AudioListViewControllerTests.swift in Sources */,
-				984A75232A15C57900C14538 /* AudioListViewController+TestHelper.swift in Sources */,
+				984A75232A15C57900C14538 /* TestHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
