@@ -30,11 +30,24 @@ final class AudioListCell: UICollectionViewCell {
         let button = UIButton()
         button.setImage(UIImage(systemName: "play.circle"), for: .normal)
         button.setImage(UIImage(systemName: "pause.circle"), for: .selected)
+        button.contentVerticalAlignment = .fill
+        button.contentHorizontalAlignment = .fill
+        button.tintColor = .darkGray
         button.isUserInteractionEnabled = false
         
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        setUpUI()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     private func setUpUI() {
         contentView.addSubviews([audioImageView, longDescriptionLabel])
@@ -42,18 +55,19 @@ final class AudioListCell: UICollectionViewCell {
         
         audioImageView.snp.makeConstraints { make in
             make.leading.trailing.top.equalToSuperview()
+            make.height.equalTo(contentView.snp.width)
         }
         
         longDescriptionLabel.snp.makeConstraints { make in
             make.top.equalTo(audioImageView.snp.bottom).offset(10)
             make.leading.equalToSuperview().offset(16)
             make.trailing.equalToSuperview().offset(-16)
-            make.bottom.equalToSuperview().offset(-10)
+            make.bottom.equalToSuperview().offset(-10).priority(999)
         }
         
         playImageView.snp.makeConstraints { make in
             make.center.equalToSuperview()
-            make.size.equalTo(30)
+            make.size.equalTo(100)
         }
     }
 }
