@@ -92,6 +92,20 @@ final class AudioListViewControllerTests: XCTestCase {
         XCTAssertEqual(view?.renderedImageData, imageData)
     }
     
+    func test_audioImageView_doesNotAlterImageStateOnError() {
+        let (sut, loader) = makeSUT()
+        sut.loadViewIfNeeded()
+        
+        sut.simulateInputKeyword(with: anyKeyword())
+        loader.completeSuccessfully(with: [makeAudio()])
+        
+        let view = sut.simulateAudioImageViewIsVisible(at: 0)
+        XCTAssertNil(view?.renderedImageData)
+        
+        loader.completeImageData(with: anyNSError())
+        XCTAssertNil(view?.renderedImageData)
+    }
+    
     // MARK: - Helpers
     
     private func makeSUT(file: StaticString = #filePath, line: UInt = #line) -> (AudioListViewController, AudioLoaderSpy) {
@@ -175,6 +189,10 @@ final class AudioListViewControllerTests: XCTestCase {
         
         func completeImageDataSuccessfully(with data: Data, at index: Int = 0) {
             receivedImageCompletions[index](.success(data))
+        }
+        
+        func completeImageData(with error: Error, at index: Int = 0) {
+            receivedImageCompletions[index](.failure(error))
         }
     }
 }
