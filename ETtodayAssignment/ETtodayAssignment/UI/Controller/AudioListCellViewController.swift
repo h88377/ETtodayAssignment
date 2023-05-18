@@ -8,6 +8,11 @@
 import UIKit
 import RxSwift
 
+protocol AudioPlayer {
+    func play(with url: URL)
+    func pause(for url: URL)
+}
+
 final class AudioListCellViewController {
     private let id = UUID()
     private let disposeBag = DisposeBag()
@@ -40,9 +45,19 @@ final class AudioListCellViewController {
         guard let cell = cell else { return }
         
         cell.playImageView.isSelected = !cell.playImageView.isSelected
+        
+        let previewURL = audio.previewURL
+        if cell.playImageView.isSelected {
+            viewModel.play(with: previewURL)
+        } else {
+            viewModel.pause(for: previewURL)
+        }
     }
     
     func cancelSelection() {
+        if cell?.playImageView.isSelected == true {
+            viewModel.pause(for: audio.previewURL)
+        }
         cell?.playImageView.isSelected = false
     }
 }

@@ -11,7 +11,7 @@ import XCTest
 final class AudioListUIIntegrationTests: XCTestCase {
     
     func test_init_doesNotRequestAudioes() {
-        let (_, loader) = makeSUT()
+        let (_, loader, _) = makeSUT()
         
         XCTAssertEqual(loader.receivedKeywords, [])
     }
@@ -19,7 +19,7 @@ final class AudioListUIIntegrationTests: XCTestCase {
     func test_inputKeywordActions_requestAudioesWithKeyword() {
         let firstKeyword = "keywordOne"
         let secondKeyword = "keywordOne"
-        let (sut, loader) = makeSUT()
+        let (sut, loader, _) = makeSUT()
         sut.loadViewIfNeeded()
         
         sut.simulateInputKeyword(with: firstKeyword)
@@ -35,7 +35,7 @@ final class AudioListUIIntegrationTests: XCTestCase {
         let firstAudios = [makeAudio()]
         let secondAudios = [makeAudio(), makeAudio(longDescription: "longDescription")]
         let emptyAuduo = [Audio]()
-        let (sut, loader) = makeSUT()
+        let (sut, loader, _) = makeSUT()
         sut.loadViewIfNeeded()
         
         sut.simulateInputKeyword(with: firstKeyword)
@@ -53,7 +53,7 @@ final class AudioListUIIntegrationTests: XCTestCase {
     }
     
     func test_inputKeywordCompletions_showsErrorReminderOnError() {
-        let (sut, loader) = makeSUT()
+        let (sut, loader, _) = makeSUT()
         sut.loadViewIfNeeded()
         
         sut.simulateInputKeyword(with: anyKeyword())
@@ -65,7 +65,7 @@ final class AudioListUIIntegrationTests: XCTestCase {
     func test_audioImageView_loadsImageURLWhenVisible() {
         let imageURL = anyURL()
         let audio = makeAudio(imageURL: imageURL)
-        let (sut, loader) = makeSUT()
+        let (sut, loader, _) = makeSUT()
         sut.loadViewIfNeeded()
         
         sut.simulateInputKeyword(with: anyKeyword())
@@ -77,7 +77,7 @@ final class AudioListUIIntegrationTests: XCTestCase {
     
     func test_audioImageView_rendersSuccessfullyLoadedImage() {
         let audio = makeAudio(imageURL: anyURL())
-        let (sut, loader) = makeSUT()
+        let (sut, loader, _) = makeSUT()
         sut.loadViewIfNeeded()
         
         sut.simulateInputKeyword(with: anyKeyword())
@@ -93,7 +93,7 @@ final class AudioListUIIntegrationTests: XCTestCase {
     }
     
     func test_audioImageView_doesNotAlterImageStateOnError() {
-        let (sut, loader) = makeSUT()
+        let (sut, loader, _) = makeSUT()
         sut.loadViewIfNeeded()
         
         sut.simulateInputKeyword(with: anyKeyword())
@@ -107,7 +107,7 @@ final class AudioListUIIntegrationTests: XCTestCase {
     }
     
     func test_audioPlayView_showsPlayOrPauseViewWhenSelectingViewAccordingly() {
-        let (sut, loader) = makeSUT()
+        let (sut, loader, _) = makeSUT()
         sut.loadViewIfNeeded()
         
         sut.simulateInputKeyword(with: anyKeyword())
@@ -131,14 +131,43 @@ final class AudioListUIIntegrationTests: XCTestCase {
         XCTAssertEqual(view1?.isShowingPauseView, true)
     }
     
+    func test_audioPlayView_requestsPlayOrPauseWhenSelectingViewAccordingly() {
+        let firstPlayURL = URL(string: "https://first-play-url.com")!
+        let secondPlayURL = URL(string: "https://first-play-url.com")!
+        let (sut, loader, player) = makeSUT()
+        sut.loadViewIfNeeded()
+        
+        sut.simulateInputKeyword(with: anyKeyword())
+        loader.completeSuccessfully(with: [makeAudio(previewURL: firstPlayURL), makeAudio(previewURL: secondPlayURL)])
+        
+        sut.simulateAudioImageViewIsVisible(at: 0)
+        sut.simulateAudioImageViewIsVisible(at: 1)
+        XCTAssertEqual(player.receivedPlayURL, [])
+        XCTAssertEqual(player.receivedPauseURL, [])
+        
+        sut.simulateAudioImageViewSelected(at: 0)
+        XCTAssertEqual(player.receivedPlayURL, [firstPlayURL])
+        XCTAssertEqual(player.receivedPauseURL, [])
+        
+        sut.simulateAudioImageViewSelected(at: 0)
+        XCTAssertEqual(player.receivedPlayURL, [firstPlayURL])
+        XCTAssertEqual(player.receivedPauseURL, [firstPlayURL])
+        
+        sut.simulateAudioImageViewSelected(at: 1)
+        XCTAssertEqual(player.receivedPlayURL, [firstPlayURL, secondPlayURL])
+        XCTAssertEqual(player.receivedPauseURL, [firstPlayURL])
+    }
+    
     // MARK: - Helpers
     
-    private func makeSUT(file: StaticString = #filePath, line: UInt = #line) -> (AudioListViewController, AudioLoaderSpy) {
+    private func makeSUT(file: StaticString = #filePath, line: UInt = #line) -> (AudioListViewController, AudioLoaderSpy, AudioPlayerSpy) {
         let loader = AudioLoaderSpy()
-        let sut = AudioListUIComposer.AudioUIComposedWith(audioLoader: loader, imageDataLoader: loader)
+        let player = AudioPlayerSpy()
+        let sut = AudioListUIComposer.AudioUIComposedWith(audioLoader: loader, audioPlayer: player,  imageDataLoader: loader)
         trackForMemoryLeak(sut, file: file, line: line)
         trackForMemoryLeak(loader, file: file, line: line)
-        return (sut, loader)
+        trackForMemoryLeak(player, file: file, line: line)
+        return (sut, loader, player)
     }
     
     private func trackForMemoryLeak(_ instance: AnyObject, file: StaticString = #filePath, line: UInt = #line) {
@@ -220,4 +249,18 @@ final class AudioListUIIntegrationTests: XCTestCase {
             receivedImageCompletions[index](.failure(error))
         }
     }
+    
+    private class AudioPlayerSpy: AudioPlayer {
+        private(set) var receivedPlayURL = [URL]()
+        private(set) var receivedPauseURL = [URL]()
+        
+        func play(with url: URL) {
+            receivedPlayURL.append(url)
+        }
+        
+        func pause(for url: URL) {
+            receivedPauseURL.append(url)
+        }
+    }
+
 }
