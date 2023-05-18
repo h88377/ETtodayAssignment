@@ -8,7 +8,7 @@
 import XCTest
 @testable import ETtodayAssignment
 
-final class AudioListViewControllerTests: XCTestCase {
+final class AudioListUIIntegrationTests: XCTestCase {
     
     func test_init_doesNotRequestAudioes() {
         let (_, loader) = makeSUT()

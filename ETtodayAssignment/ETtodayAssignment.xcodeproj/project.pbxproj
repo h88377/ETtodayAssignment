@@ -13,7 +13,7 @@
 		984A74DD2A14A18000C14538 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984A74DC2A14A18000C14538 /* ViewController.swift */; };
 		984A74E22A14A18100C14538 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 984A74E12A14A18100C14538 /* Assets.xcassets */; };
 		984A74E52A14A18100C14538 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 984A74E32A14A18100C14538 /* LaunchScreen.storyboard */; };
-		984A74F02A14A18100C14538 /* AudioListViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984A74EF2A14A18100C14538 /* AudioListViewControllerTests.swift */; };
+		984A74F02A14A18100C14538 /* AudioListUIIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984A74EF2A14A18100C14538 /* AudioListUIIntegrationTests.swift */; };
 		984A75092A14A57A00C14538 /* AudioLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984A75082A14A57A00C14538 /* AudioLoader.swift */; };
 		984A750B2A14AB1D00C14538 /* AudioListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984A750A2A14AB1D00C14538 /* AudioListViewController.swift */; };
 		984A750D2A14BBD800C14538 /* AudioListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984A750C2A14BBD800C14538 /* AudioListCell.swift */; };
@@ -52,7 +52,7 @@
 		984A74E42A14A18100C14538 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		984A74E62A14A18100C14538 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		984A74EB2A14A18100C14538 /* ETtodayAssignmentTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ETtodayAssignmentTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		984A74EF2A14A18100C14538 /* AudioListViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioListViewControllerTests.swift; sourceTree = "<group>"; };
+		984A74EF2A14A18100C14538 /* AudioListUIIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioListUIIntegrationTests.swift; sourceTree = "<group>"; };
 		984A75082A14A57A00C14538 /* AudioLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioLoader.swift; sourceTree = "<group>"; };
 		984A750A2A14AB1D00C14538 /* AudioListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioListViewController.swift; sourceTree = "<group>"; };
 		984A750C2A14BBD800C14538 /* AudioListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioListCell.swift; sourceTree = "<group>"; };
@@ -125,7 +125,7 @@
 			isa = PBXGroup;
 			children = (
 				984A75212A15C56200C14538 /* Helper */,
-				984A74EF2A14A18100C14538 /* AudioListViewControllerTests.swift */,
+				984A74EF2A14A18100C14538 /* AudioListUIIntegrationTests.swift */,
 			);
 			path = ETtodayAssignmentTests;
 			sourceTree = "<group>";
@@ -398,7 +398,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				984A74F02A14A18100C14538 /* AudioListViewControllerTests.swift in Sources */,
+				984A74F02A14A18100C14538 /* AudioListUIIntegrationTests.swift in Sources */,
 				984A75232A15C57900C14538 /* TestHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
