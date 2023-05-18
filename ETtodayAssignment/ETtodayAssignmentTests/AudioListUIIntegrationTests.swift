@@ -148,9 +148,31 @@ final class AudioListUIIntegrationTests: XCTestCase {
         XCTAssertEqual(view0?.isShowingPlayView, true)
     }
     
+    func test_audioPlayView_pausesAudioPlayingWhenTypingKeyword() {
+        let imageURL = URL(string: "https://image-url.com")!
+        let (sut, loader, player) = makeSUT()
+        sut.loadViewIfNeeded()
+        
+        sut.simulateInputKeyword(with: anyKeyword())
+        loader.completeSuccessfully(with: [makeAudio(previewURL: imageURL)])
+        
+        sut.simulateAudioImageViewIsVisible(at: 0)
+        XCTAssertEqual(player.receivedPlayURL, [])
+        XCTAssertEqual(player.receivedPauseURL, [])
+        
+        sut.simulateAudioImageViewSelected(at: 0)
+        XCTAssertEqual(player.receivedPlayURL, [imageURL])
+        XCTAssertEqual(player.receivedPauseURL, [])
+        
+        sut.simulateInputKeyword(with: anyKeyword())
+        
+        XCTAssertEqual(player.receivedPlayURL, [imageURL])
+        XCTAssertEqual(player.receivedPauseURL, [imageURL])
+    }
+    
     func test_audioPlayView_requestsPlayOrPauseWhenSelectingViewAccordingly() {
         let firstPlayURL = URL(string: "https://first-play-url.com")!
-        let secondPlayURL = URL(string: "https://first-play-url.com")!
+        let secondPlayURL = URL(string: "https://second-play-url.com")!
         let (sut, loader, player) = makeSUT()
         sut.loadViewIfNeeded()
         
