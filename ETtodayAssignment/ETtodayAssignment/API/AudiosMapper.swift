@@ -13,10 +13,14 @@ final class AudiosMapper {
     private static var OK_200: Int { return 200 }
     
     static func map(with data: Data, _ response: HTTPURLResponse) throws -> [RemoteAudio] {
-        guard response.statusCode == OK_200, let remoteAudios = try? JSONDecoder().decode([RemoteAudio].self, from: data) else {
+        guard response.statusCode == OK_200, let root = try? JSONDecoder().decode(Root.self, from: data) else {
             throw RemoteAudioLoader.Error.invalidData
         }
         
-        return remoteAudios
+        return root.results
     }
+}
+
+private struct Root: Decodable {
+    let results: [RemoteAudio]
 }

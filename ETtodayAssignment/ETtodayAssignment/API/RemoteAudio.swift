@@ -11,4 +11,10 @@ struct RemoteAudio: Decodable {
     let imageURL: URL
     let previewURL: URL
     var longDescription: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case imageURL = "artworkUrl100"
+        case previewURL = "previewUrl"
+        case longDescription
+    }
 }
