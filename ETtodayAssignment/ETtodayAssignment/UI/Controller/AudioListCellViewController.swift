@@ -25,9 +25,15 @@ final class AudioListCellViewController {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AudioListCell.identifier, for: indexPath) as? AudioListCell else { return UICollectionViewCell() }
         
         viewModel.requestImageData(with: audio.imageURL)
+        
         viewModel.image
             .subscribe(onNext: { [weak cell] image in
                 cell?.audioImageView.image = image
+            }).disposed(by: disposeBag)
+        
+        viewModel.didEndPlaying
+            .subscribe(onNext: { [weak cell] in
+                cell?.playImageView.isSelected = false
             }).disposed(by: disposeBag)
         
         cell.longDescriptionLabel.text = audio.longDescription
