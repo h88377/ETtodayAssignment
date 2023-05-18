@@ -33,6 +33,7 @@
 		984A75332A16135500C14538 /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984A75322A16135500C14538 /* Audio.swift */; };
 		984A75352A16138D00C14538 /* URLSessionHTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984A75342A16138D00C14538 /* URLSessionHTTPClient.swift */; };
 		984A75372A1614A900C14538 /* RemoteAudioImageDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984A75362A1614A900C14538 /* RemoteAudioImageDataLoader.swift */; };
+		984A75392A161F0300C14538 /* KingfisherImageHTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984A75382A161F0300C14538 /* KingfisherImageHTTPClient.swift */; };
 		BACCD65F7F90439D0F7E6A46 /* Pods_ETtodayAssignmentTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A79D92C9B5F4A6EEF92777C /* Pods_ETtodayAssignmentTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -81,6 +82,7 @@
 		984A75322A16135500C14538 /* Audio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Audio.swift; sourceTree = "<group>"; };
 		984A75342A16138D00C14538 /* URLSessionHTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPClient.swift; sourceTree = "<group>"; };
 		984A75362A1614A900C14538 /* RemoteAudioImageDataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteAudioImageDataLoader.swift; sourceTree = "<group>"; };
+		984A75382A161F0300C14538 /* KingfisherImageHTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KingfisherImageHTTPClient.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -222,6 +224,7 @@
 				984A752E2A16130D00C14538 /* RemoteAudio.swift */,
 				984A752C2A1612F500C14538 /* HTTPClient.swift */,
 				984A75342A16138D00C14538 /* URLSessionHTTPClient.swift */,
+				984A75382A161F0300C14538 /* KingfisherImageHTTPClient.swift */,
 				984A75362A1614A900C14538 /* RemoteAudioImageDataLoader.swift */,
 			);
 			path = API;
@@ -418,6 +421,7 @@
 				984A75202A14E26200C14538 /* AudioListCellViewModel.swift in Sources */,
 				984A74DD2A14A18000C14538 /* ViewController.swift in Sources */,
 				984A751C2A14D97A00C14538 /* AudioListUIComposer.swift in Sources */,
+				984A75392A161F0300C14538 /* KingfisherImageHTTPClient.swift in Sources */,
 				984A751E2A14E22500C14538 /* AudioImageDataLoader.swift in Sources */,
 				984A75312A16132C00C14538 /* AudiosMapper.swift in Sources */,
 				984A75092A14A57A00C14538 /* AudioLoader.swift in Sources */,
