@@ -12,4 +12,6 @@ final class AudioListCell: UICollectionViewCell {
     
     let longDescriptionLabel = UILabel()
     let audioImageView = UIImageView()
+    let playImageView = UIButton()
+    
 }

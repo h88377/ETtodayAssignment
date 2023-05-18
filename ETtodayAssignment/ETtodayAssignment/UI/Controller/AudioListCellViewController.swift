@@ -11,6 +11,8 @@ import RxSwift
 final class AudioListCellViewController {
     private let id = UUID()
     private let disposeBag = DisposeBag()
+    private var cell: AudioListCell?
+    
     private let audio: Audio
     private let viewModel: AudioListCellViewModel<UIImage>
     
@@ -29,7 +31,19 @@ final class AudioListCellViewController {
             }).disposed(by: disposeBag)
         
         cell.longDescriptionLabel.text = audio.longDescription
+        cell.playImageView.isSelected = false
+        self.cell = cell
         return cell
+    }
+    
+    func didSelect() {
+        guard let cell = cell else { return }
+        
+        cell.playImageView.isSelected = !cell.playImageView.isSelected
+    }
+    
+    func cancelSelection() {
+        cell?.playImageView.isSelected = false
     }
 }
 

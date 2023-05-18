@@ -28,6 +28,11 @@ extension AudioListViewController {
         return view as? AudioListCell
     }
     
+    func simulateAudioImageViewSelected(at index: Int) {
+        let delegate = collectionView.delegate
+        delegate?.collectionView?(collectionView, didSelectItemAt: IndexPath(item: index, section: audioSection))
+    }
+    
     func itemAt(index: Int) -> UICollectionViewCell? {
         let dataSource = collectionView.dataSource
         return dataSource?.collectionView(collectionView, cellForItemAt: IndexPath(item: index, section: audioSection))
@@ -52,6 +57,14 @@ extension AudioListViewController {
 extension AudioListCell {
     var renderedImageData: Data? {
         return audioImageView.image?.pngData()
+    }
+    
+    var isShowingPlayView: Bool {
+        return playImageView.isSelected == false
+    }
+    
+    var isShowingPauseView: Bool {
+        return playImageView.isSelected == true
     }
 }
 

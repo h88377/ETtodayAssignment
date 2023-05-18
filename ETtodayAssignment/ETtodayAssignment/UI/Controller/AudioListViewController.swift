@@ -11,6 +11,7 @@ final class AudioListViewController: UICollectionViewController {
     let searchBar = UISearchBar()
     let reminder = UILabel()
     
+    private var selectedCellController: AudioListCellViewController?
     private let viewModel: AudioListViewModel
     
     init(viewModel: AudioListViewModel) {
@@ -47,7 +48,28 @@ final class AudioListViewController: UICollectionViewController {
     func setReminder(_ type: AudioListReminder) {
         reminder.text = type.rawValue
     }
+    
+    private func cellController(at index: Int) -> AudioListCellViewController {
+        let snapshot = dataSource.snapshot()
+        return snapshot.itemIdentifiers(inSection: audioSection)[index]
+    }
 }
+
+// MARK: - UICollectionViewDelegate
+
+extension AudioListViewController {
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if selectedCellController === cellController(at: indexPath.item) {
+            cellController(at: indexPath.item).didSelect()
+        } else {
+            selectedCellController?.cancelSelection()
+            cellController(at: indexPath.item).didSelect()
+            selectedCellController = cellController(at: indexPath.item)
+        }
+    }
+}
+
+// MARK: - UISearchBarDelegate
 
 extension AudioListViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
