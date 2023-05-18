@@ -16,10 +16,22 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         let window = UIWindow(windowScene: windowScene)
-        window.rootViewController = ViewController()
+        window.rootViewController = makeAudioListViewController()
         
         self.window = window
         window.makeKeyAndVisible()
     }
 }
 
+extension SceneDelegate {
+    func makeAudioListViewController() -> AudioListViewController {
+        let baseURL = URL(string: "https://itunes.apple.com/search")!
+        let client = URLSessionHTTPClient()
+        let audioLoader = RemoteAudioLoader(baseURL: baseURL, client: client)
+        let audioPlayer = AVPlayerAudioPlayer()
+        let kingfisherClient = KingfisherImageHTTPClient(manager: .shared)
+        let imageDataLoader = RemoteAudioImageDataLoader(client: kingfisherClient)
+        
+        return AudioListUIComposer.AudioUIComposedWith(audioLoader: audioLoader, audioPlayer: audioPlayer, imageDataLoader: imageDataLoader)
+    }
+}
