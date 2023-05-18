@@ -128,9 +128,7 @@
 		984A74D72A14A18000C14538 /* ETtodayAssignment */ = {
 			isa = PBXGroup;
 			children = (
-				984A74D82A14A18000C14538 /* AppDelegate.swift */,
-				984A74DA2A14A18000C14538 /* SceneDelegate.swift */,
-				984A751B2A14D97A00C14538 /* AudioListUIComposer.swift */,
+				984A753D2A16406B00C14538 /* Composite */,
 				984A753A2A16203D00C14538 /* StreamingLayer */,
 				984A75282A1610E000C14538 /* API */,
 				984A75112A14BC4500C14538 /* Feature */,
@@ -236,6 +234,16 @@
 				984A753B2A16209900C14538 /* AVPlayerAudioPlayer.swift */,
 			);
 			path = StreamingLayer;
+			sourceTree = "<group>";
+		};
+		984A753D2A16406B00C14538 /* Composite */ = {
+			isa = PBXGroup;
+			children = (
+				984A74D82A14A18000C14538 /* AppDelegate.swift */,
+				984A74DA2A14A18000C14538 /* SceneDelegate.swift */,
+				984A751B2A14D97A00C14538 /* AudioListUIComposer.swift */,
+			);
+			path = Composite;
 			sourceTree = "<group>";
 		};
 		D2B9BD2ADE76FB11FBEA36EE /* Frameworks */ = {
