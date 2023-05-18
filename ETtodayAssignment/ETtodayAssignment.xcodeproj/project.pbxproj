@@ -129,7 +129,7 @@
 			isa = PBXGroup;
 			children = (
 				984A753D2A16406B00C14538 /* Composite */,
-				984A753A2A16203D00C14538 /* StreamingLayer */,
+				984A753A2A16203D00C14538 /* Streaming */,
 				984A75282A1610E000C14538 /* API */,
 				984A75112A14BC4500C14538 /* Feature */,
 				984A75102A14BC2700C14538 /* UI */,
@@ -228,12 +228,12 @@
 			path = API;
 			sourceTree = "<group>";
 		};
-		984A753A2A16203D00C14538 /* StreamingLayer */ = {
+		984A753A2A16203D00C14538 /* Streaming */ = {
 			isa = PBXGroup;
 			children = (
 				984A753B2A16209900C14538 /* AVPlayerAudioPlayer.swift */,
 			);
-			path = StreamingLayer;
+			path = Streaming;
 			sourceTree = "<group>";
 		};
 		984A753D2A16406B00C14538 /* Composite */ = {
