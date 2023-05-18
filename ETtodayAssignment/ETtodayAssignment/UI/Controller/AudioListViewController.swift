@@ -126,8 +126,8 @@ extension AudioListViewController: UICollectionViewDelegate {
 
 extension AudioListViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        viewModel.loadAudios(with: searchText)
         selectedCellController?.cancelSelection()
         selectedCellController = nil
+        viewModel.loadAudios(with: searchText)
     }
 }
