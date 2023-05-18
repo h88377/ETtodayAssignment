@@ -8,11 +8,6 @@
 import UIKit
 import RxSwift
 
-protocol AudioPlayer {
-    func play(with url: URL)
-    func pause(for url: URL)
-}
-
 final class AudioListCellViewController {
     private let id = UUID()
     private let disposeBag = DisposeBag()
