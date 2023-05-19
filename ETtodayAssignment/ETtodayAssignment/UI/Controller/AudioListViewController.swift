@@ -102,7 +102,9 @@ final class AudioListViewController: UIViewController {
         return UICollectionViewCompositionalLayout(section: section)
     }
     
-    private func cellController(at index: Int) -> AudioListCellViewController {
+    private func cellController(at index: Int) -> AudioListCellViewController? {
+        guard dataSource.snapshot().itemIdentifiers.count > 0 else { return nil }
+        
         let snapshot = dataSource.snapshot()
         return snapshot.itemIdentifiers(inSection: audioSection)[index]
     }
@@ -113,12 +115,20 @@ final class AudioListViewController: UIViewController {
 extension AudioListViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if selectedCellController === cellController(at: indexPath.item) {
-            cellController(at: indexPath.item).didSelect()
+            cellController(at: indexPath.item)?.didSelect()
         } else {
             selectedCellController?.cancelSelection()
-            cellController(at: indexPath.item).didSelect()
+            cellController(at: indexPath.item)?.didSelect()
             selectedCellController = cellController(at: indexPath.item)
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        cellController(at: indexPath.item)?.requestImageData()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        cellController(at: indexPath.item)?.cancelTask()
     }
 }
 

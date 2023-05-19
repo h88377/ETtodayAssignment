@@ -39,6 +39,8 @@ final class AudioListCell: UICollectionViewCell {
         return button
     }()
     
+    var prepareForReuseHandler: (() -> Void)?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -47,6 +49,12 @@ final class AudioListCell: UICollectionViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        prepareForReuseHandler?()
     }
     
     private func setUpUI() {

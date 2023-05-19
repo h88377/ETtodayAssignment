@@ -18,6 +18,8 @@ extension AudioListViewController {
     func simulateAudioImageViewIsVisible(at index: Int) -> AudioListCell? {
         let dataSource = collectionView.dataSource
         let view = dataSource?.collectionView(collectionView, cellForItemAt: IndexPath(item: index, section: audioSection))
+        let delegate = collectionView.delegate
+        delegate?.collectionView?(collectionView, willDisplay: view!, forItemAt: IndexPath(item: index, section: audioSection))
         return view as? AudioListCell
     }
     

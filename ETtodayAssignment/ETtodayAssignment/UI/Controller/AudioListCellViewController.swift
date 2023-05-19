@@ -10,8 +10,9 @@ import RxSwift
 
 final class AudioListCellViewController {
     private let id = UUID()
-    private let disposeBag = DisposeBag()
     private var cell: AudioListCell?
+    private var imageSubscription: Disposable?
+    private var didEndPlayingSubscription: Disposable?
     
     private let audio: Audio
     private let viewModel: AudioListCellViewModel<UIImage>
@@ -24,22 +25,23 @@ final class AudioListCellViewController {
     func view(in collectionView: UICollectionView, indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AudioListCell.identifier, for: indexPath) as? AudioListCell else { return UICollectionViewCell() }
         
-        viewModel.requestImageData(with: audio.imageURL)
-        
-        viewModel.image
-            .subscribe(onNext: { [weak cell] image in
-                cell?.audioImageView.image = image
-            }).disposed(by: disposeBag)
-        
-        viewModel.didEndPlaying
-            .subscribe(onNext: { [weak cell] in
-                cell?.playImageView.isSelected = false
-            }).disposed(by: disposeBag)
-        
         cell.longDescriptionLabel.text = audio.longDescription
         cell.playImageView.isSelected = false
+        cell.prepareForReuseHandler = { [weak cell] in
+            cell?.audioImageView.image = nil
+        }
         self.cell = cell
         return cell
+    }
+    
+    func requestImageData() {
+        setUpBindings()
+        viewModel.requestImageData(with: audio.imageURL)
+    }
+    
+    func cancelTask() {
+        viewModel.cancelTask()
+        releaseBindings()
     }
     
     func didSelect() {
@@ -60,6 +62,23 @@ final class AudioListCellViewController {
             viewModel.pause(for: audio.previewURL)
         }
         cell?.playImageView.isSelected = false
+    }
+    
+    private func setUpBindings() {
+        imageSubscription = viewModel.image
+            .subscribe(onNext: { [weak cell] image in
+                cell?.audioImageView.image = image
+            })
+        
+        didEndPlayingSubscription = viewModel.didEndPlaying
+            .subscribe(onNext: { [weak cell] in
+                cell?.playImageView.isSelected = false
+            })
+    }
+    
+    private func releaseBindings() {
+        imageSubscription?.dispose()
+        didEndPlayingSubscription?.dispose()
     }
 }
 
