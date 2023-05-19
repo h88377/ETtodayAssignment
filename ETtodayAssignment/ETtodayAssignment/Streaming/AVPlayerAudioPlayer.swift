@@ -44,6 +44,7 @@ final class AVPlayerAudioPlayer: AudioPlayer {
     }
     
     @objc private func playerDidFinishPlaying() {
+        player?.seek(to: .zero)
         playerDidFinishHandler?()
     }
 }
