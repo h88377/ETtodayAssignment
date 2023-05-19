@@ -8,8 +8,8 @@
 import Foundation
 
 struct RemoteAudio: Decodable {
-    let imageURL: URL
-    let previewURL: URL
+    let imageURL: URL?
+    let previewURL: URL?
     var longDescription: String?
     
     enum CodingKeys: String, CodingKey {

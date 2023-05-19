@@ -59,6 +59,12 @@ final class RemoteAudioLoader: AudioLoader {
 
 private extension Array where Element == RemoteAudio {
     func toModels() -> [Audio] {
-        return map { Audio(imageURL: $0.imageURL, previewURL: $0.previewURL, longDescription: $0.longDescription) }
+        var audios = [Audio]()
+        for remote in self {
+            if let imageURL = remote.imageURL, let previewURL = remote.previewURL {
+                audios.append(Audio(imageURL: imageURL, previewURL: previewURL, longDescription: remote.longDescription))
+            }
+        }
+        return audios
     }
 }
