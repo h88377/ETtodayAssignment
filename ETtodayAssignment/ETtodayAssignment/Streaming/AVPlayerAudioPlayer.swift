@@ -7,28 +7,6 @@
 
 import AVFoundation
 
-final class RemoteAudioPlayer: AudioPlayer {
-    private var currentURL: URL?
-    private let player: StreamingAudioPlayer
-    
-    init(player: StreamingAudioPlayer) {
-        self.player = player
-    }
-    
-    func play(with url: URL, completion: @escaping (() -> Void)) {
-        guard currentURL != url else {
-            player.resume()
-            return
-        }
-        currentURL = url
-        player.play(with: url, completion: completion)
-    }
-    
-    func pause(for url: URL) {
-        player.pause(for: url)
-    }
-}
-
 final class AVPlayerAudioPlayer: StreamingAudioPlayer {
     private var player: AVPlayer?
     private var playerDidFinishHandler: (() -> Void)?
