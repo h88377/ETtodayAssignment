@@ -15,11 +15,20 @@ final class KingfisherImageHTTPClient: HTTPClient {
     }
     
     private struct UnexpectedCompletionError: Error {}
-    
-    func dispatch(_ request: URLRequest, completion: @escaping (HTTPClient.Result) -> Void) {
-        guard let url = request.url else { return }
+    private struct KingfisherImageHTTPClientTask: HTTPClientTask {
+        var task: DownloadTask?
         
-        manager.retrieveImage(with: url) { result in
+        func cancel() {
+            task?.cancel()
+        }
+    }
+    
+    func dispatch(_ request: URLRequest, completion: @escaping (HTTPClient.Result) -> Void) -> HTTPClientTask {
+        guard let url = request.url else {
+            return KingfisherImageHTTPClientTask()
+        }
+        
+        let task = manager.retrieveImage(with: url) { result in
             switch result {
             case let .success(data):
                 guard let imageData = data.image.pngData(), let response = HTTPURLResponse(url: url, statusCode: 200, httpVersion: nil, headerFields: nil) else {
@@ -31,5 +40,6 @@ final class KingfisherImageHTTPClient: HTTPClient {
                 completion(.failure(error))
             }
         }
+        return KingfisherImageHTTPClientTask(task: task)
     }
 }

@@ -32,8 +32,8 @@ extension MainThreadDispatchDecorator: AudioLoader where T == AudioLoader {
 }
 
 extension MainThreadDispatchDecorator: AudioImageDataLoader where T == AudioImageDataLoader {
-    func loadImageData(from url: URL, completion: @escaping (AudioImageDataLoader.Result) -> Void) {
-        decoratee.loadImageData(from: url) { [weak self] result in
+    func loadImageData(from url: URL, completion: @escaping (AudioImageDataLoader.Result) -> Void) -> AudioImageDataLoaderTask {
+        return decoratee.loadImageData(from: url) { [weak self] result in
             self?.dispatch { completion(result) }
         }
     }

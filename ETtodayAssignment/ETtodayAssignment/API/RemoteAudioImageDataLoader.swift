@@ -19,8 +19,31 @@ final class RemoteAudioImageDataLoader: AudioImageDataLoader {
         self.client = client
     }
     
-    func loadImageData(from url: URL, completion: @escaping (AudioImageDataLoader.Result) -> Void) {
-        client.dispatch(URLRequest(url: url)) { [weak self] result in
+    private final class RemoteAudioImageDataLoaderTask: AudioImageDataLoaderTask {
+        private var completion: ((AudioImageDataLoader.Result) -> Void)?
+        var clientTask: HTTPClientTask?
+        
+        init(_ completion: @escaping (AudioImageDataLoader.Result) -> Void) {
+            self.completion = completion
+        }
+        
+        func complete(_ result: AudioImageDataLoader.Result) {
+            completion?(result)
+        }
+        
+        func cancel() {
+            preventFurtherCompletions()
+            clientTask?.cancel()
+        }
+        
+        private func preventFurtherCompletions() {
+            completion = nil
+        }
+    }
+    
+    func loadImageData(from url: URL, completion: @escaping (AudioImageDataLoader.Result) -> Void) -> AudioImageDataLoaderTask {
+        let loaderTask = RemoteAudioImageDataLoaderTask(completion)
+        loaderTask.clientTask = client.dispatch(URLRequest(url: url)) { [weak self] result in
             guard self != nil else { return }
             
             switch result {
@@ -35,5 +58,6 @@ final class RemoteAudioImageDataLoader: AudioImageDataLoader {
                 completion(.failure(Error.connectivity))
             }
         }
+        return loaderTask
     }
 }

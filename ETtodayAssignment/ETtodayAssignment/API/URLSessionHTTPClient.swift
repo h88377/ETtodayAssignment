@@ -15,9 +15,16 @@ final class URLSessionHTTPClient: HTTPClient {
     }
     
     private struct UnexpectedCompletionError: Error {}
+    private struct URLSessionHTTPClientTask: HTTPClientTask {
+        let task: URLSessionTask
+        
+        func cancel() {
+            task.cancel()
+        }
+    }
     
-    func dispatch(_ request: URLRequest, completion: @escaping (HTTPClient.Result) -> Void) {
-        session.dataTask(with: request) { data, response, error in
+    func dispatch(_ request: URLRequest, completion: @escaping (HTTPClient.Result) -> Void) -> HTTPClientTask {
+        let task = session.dataTask(with: request) { data, response, error in
             if let data = data, let response = response as? HTTPURLResponse {
                 completion(.success((data, response)))
             } else if let error = error {
@@ -25,6 +32,8 @@ final class URLSessionHTTPClient: HTTPClient {
             } else {
                 completion(.failure(UnexpectedCompletionError()))
             }
-        }.resume()
+        }
+        task.resume()
+        return URLSessionHTTPClientTask(task: task)
     }
 }

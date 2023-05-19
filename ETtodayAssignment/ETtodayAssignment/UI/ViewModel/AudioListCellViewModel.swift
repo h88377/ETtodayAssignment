@@ -10,6 +10,7 @@ import RxCocoa
 final class AudioListCellViewModel<Image> {
     let image = PublishRelay<Image>()
     let didEndPlaying = PublishRelay<Void>()
+    private var task: AudioImageDataLoaderTask?
     
     private let imageDataLoader: AudioImageDataLoader
     private let imageTransformer: (Data) -> Image?
@@ -22,11 +23,16 @@ final class AudioListCellViewModel<Image> {
     }
     
     func requestImageData(with url: URL) {
-        imageDataLoader.loadImageData(from: url) { [weak self] result in
+        task = imageDataLoader.loadImageData(from: url) { [weak self] result in
             if let data = try? result.get(), let image = self?.imageTransformer(data) {
                 self?.image.accept(image)
             }
         }
+    }
+    
+    func cancelTask() {
+        task?.cancel()
+        task = nil
     }
     
     func play(with url: URL) {

@@ -292,9 +292,14 @@ final class AudioListUIIntegrationTests: XCTestCase {
         private(set) var receivedURLs = [URL]()
         private var receivedImageCompletions = [(AudioImageDataLoader.Result) -> Void]()
         
-        func loadImageData(from url: URL, completion: @escaping (AudioImageDataLoader.Result) -> Void) {
+        private struct TaskSpy: AudioImageDataLoaderTask {
+            func cancel() {}
+        }
+        
+        func loadImageData(from url: URL, completion: @escaping (AudioImageDataLoader.Result) -> Void) -> AudioImageDataLoaderTask {
             receivedURLs.append(url)
             receivedImageCompletions.append(completion)
+            return TaskSpy()
         }
         
         func completeImageDataSuccessfully(with data: Data, at index: Int = 0) {
