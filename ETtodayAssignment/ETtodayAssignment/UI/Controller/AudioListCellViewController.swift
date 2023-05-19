@@ -7,10 +7,14 @@
 
 import UIKit
 import RxSwift
+import RxCocoa
 
 final class AudioListCellViewController {
     private let id = UUID()
     private var cell: AudioListCell?
+    
+    private let isPlaying = BehaviorRelay<Bool>(value: false)
+    private var isPlayingSubscription: Disposable?
     private var imageSubscription: Disposable?
     private var didEndPlayingSubscription: Disposable?
     
@@ -30,6 +34,7 @@ final class AudioListCellViewController {
         cell.prepareForReuseHandler = { [weak cell] in
             cell?.audioImageView.image = nil
         }
+        
         self.cell = cell
         return cell
     }
@@ -47,10 +52,10 @@ final class AudioListCellViewController {
     func didSelect() {
         guard let cell = cell else { return }
         
-        cell.playImageView.isSelected = !cell.playImageView.isSelected
+        isPlaying.accept(!cell.playImageView.isSelected)
         
         let previewURL = audio.previewURL
-        if cell.playImageView.isSelected {
+        if isPlaying.value {
             viewModel.play(with: previewURL)
         } else {
             viewModel.pause(for: previewURL)
@@ -58,10 +63,10 @@ final class AudioListCellViewController {
     }
     
     func cancelSelection() {
-        if cell?.playImageView.isSelected == true {
+        if isPlaying.value == true {
             viewModel.pause(for: audio.previewURL)
         }
-        cell?.playImageView.isSelected = false
+        isPlaying.accept(false)
     }
     
     private func setUpBindings() {
@@ -71,14 +76,20 @@ final class AudioListCellViewController {
             })
         
         didEndPlayingSubscription = viewModel.didEndPlaying
-            .subscribe(onNext: { [weak cell] in
-                cell?.playImageView.isSelected = false
+            .subscribe(onNext: { [weak self] in
+                self?.isPlaying.accept(false)
             })
+        
+        isPlayingSubscription = isPlaying
+            .subscribe(onNext: { [weak cell] isPlaying in
+                cell?.playImageView.isSelected = isPlaying
+        })
     }
     
     private func releaseBindings() {
         imageSubscription?.dispose()
         didEndPlayingSubscription?.dispose()
+        isPlayingSubscription?.dispose()
     }
 }
 
