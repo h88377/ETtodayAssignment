@@ -31,8 +31,9 @@ final class AudioListCellViewController {
         
         cell.longDescriptionLabel.text = audio.longDescription
         cell.playImageView.isSelected = false
-        cell.prepareForReuseHandler = { [weak cell] in
+        cell.prepareForReuseHandler = { [weak cell, weak self] in
             cell?.audioImageView.image = nil
+            self?.cancelTask()
         }
         
         self.cell = cell
@@ -42,11 +43,6 @@ final class AudioListCellViewController {
     func requestImageData() {
         setUpBindings()
         viewModel.requestImageData(with: audio.imageURL)
-    }
-    
-    func cancelTask() {
-        viewModel.cancelTask()
-        releaseBindings()
     }
     
     func didSelect() {
@@ -69,6 +65,11 @@ final class AudioListCellViewController {
         isPlaying.accept(false)
     }
     
+    private func cancelTask() {
+        viewModel.cancelTask()
+        releaseBindings()
+    }
+    
     private func setUpBindings() {
         imageSubscription = viewModel.image
             .subscribe(onNext: { [weak cell] image in
@@ -83,7 +84,7 @@ final class AudioListCellViewController {
         isPlayingSubscription = isPlaying
             .subscribe(onNext: { [weak cell] isPlaying in
                 cell?.playImageView.isSelected = isPlaying
-        })
+            })
     }
     
     private func releaseBindings() {

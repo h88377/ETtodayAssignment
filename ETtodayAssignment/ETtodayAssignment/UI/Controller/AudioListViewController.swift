@@ -126,10 +126,6 @@ extension AudioListViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         cellController(at: indexPath.item)?.requestImageData()
     }
-    
-    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        cellController(at: indexPath.item)?.cancelTask()
-    }
 }
 
 // MARK: - UISearchBarDelegate
