@@ -41,7 +41,7 @@ final class AudioListCellViewModel<Image> {
         }
     }
     
-    func pause(for url: URL) {
-        audioPlayer.pause(for: url)
+    func pause() {
+        audioPlayer.pause()
     }
 }

@@ -9,5 +9,5 @@ import Foundation
 
 protocol AudioPlayer {
     func play(with url: URL, completion: @escaping (() -> Void))
-    func pause(for url: URL)
+    func pause()
 }

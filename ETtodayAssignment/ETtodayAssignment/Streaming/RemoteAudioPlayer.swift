@@ -24,7 +24,7 @@ final class RemoteAudioPlayer: AudioPlayer {
         player.play(with: url, completion: completion)
     }
     
-    func pause(for url: URL) {
+    func pause() {
         player.pause()
     }
 }

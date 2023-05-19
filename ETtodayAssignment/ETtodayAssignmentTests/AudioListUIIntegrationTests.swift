@@ -315,14 +315,18 @@ final class AudioListUIIntegrationTests: XCTestCase {
         private(set) var receivedPlayURL = [URL]()
         private(set) var receivedPauseURL = [URL]()
         private var receivedPlayCompletions = [() -> Void]()
+        private var currentURL: URL?
         
         func play(with url: URL, completion: @escaping (() -> Void)) {
+            currentURL = url
             receivedPlayURL.append(url)
             receivedPlayCompletions.append(completion)
         }
         
-        func pause(for url: URL) {
-            receivedPauseURL.append(url)
+        func pause() {
+            if let currentURL = currentURL {
+                receivedPauseURL.append(currentURL)
+            }
         }
         
         func completePlaying(at index: Int) {

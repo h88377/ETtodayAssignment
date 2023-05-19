@@ -54,13 +54,13 @@ final class AudioListCellViewController {
         if isPlaying.value {
             viewModel.play(with: previewURL)
         } else {
-            viewModel.pause(for: previewURL)
+            viewModel.pause()
         }
     }
     
     func cancelSelection() {
         if isPlaying.value == true {
-            viewModel.pause(for: audio.previewURL)
+            viewModel.pause()
         }
         isPlaying.accept(false)
     }
