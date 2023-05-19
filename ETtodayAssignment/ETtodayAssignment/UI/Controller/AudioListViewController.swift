@@ -58,6 +58,7 @@ final class AudioListViewController: UIViewController {
         collectionView.dataSource = dataSource
         collectionView.collectionViewLayout = configureCollectionViewLayout()
         collectionView.register(AudioListCell.self, forCellWithReuseIdentifier: AudioListCell.identifier)
+        configureDismissKeyboard()
     }
     
     func set(audios: [AudioListCellViewController]) {
@@ -107,6 +108,16 @@ final class AudioListViewController: UIViewController {
         
         let snapshot = dataSource.snapshot()
         return snapshot.itemIdentifiers(inSection: audioSection)[index]
+    }
+    
+    private func configureDismissKeyboard() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc private func dismissKeyboard() {
+        view.endEditing(true)
     }
 }
 
