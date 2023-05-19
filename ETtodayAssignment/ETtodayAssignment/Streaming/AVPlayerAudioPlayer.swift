@@ -7,12 +7,6 @@
 
 import AVFoundation
 
-protocol StreamingAudioPlayer {
-    func play(with url: URL, completion: @escaping (() -> Void))
-    func pause(for url: URL)
-    func resume()
-}
-
 final class RemoteAudioPlayer: AudioPlayer {
     private var currentURL: URL?
     private let player: StreamingAudioPlayer
