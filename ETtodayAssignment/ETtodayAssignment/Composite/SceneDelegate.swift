@@ -31,7 +31,10 @@ private extension SceneDelegate {
         let baseURL = URL(string: "https://itunes.apple.com/search")!
         let client = URLSessionHTTPClient()
         let audioLoader = RemoteAudioLoader(baseURL: baseURL, client: client)
-        let audioPlayer = AVPlayerAudioPlayer()
+        
+        let streamingPlayer = AVPlayerAudioPlayer()
+        let audioPlayer = RemoteAudioPlayer(player: streamingPlayer)
+        
         let kingfisherClient = KingfisherImageHTTPClient(manager: .shared)
         let imageDataLoader = RemoteAudioImageDataLoader(client: kingfisherClient)
         
