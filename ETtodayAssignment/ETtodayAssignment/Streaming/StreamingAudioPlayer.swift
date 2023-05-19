@@ -9,6 +9,6 @@ import Foundation
 
 protocol StreamingAudioPlayer {
     func play(with url: URL, completion: @escaping (() -> Void))
-    func pause(for url: URL)
+    func pause()
     func resume()
 }

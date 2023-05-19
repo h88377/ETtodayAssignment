@@ -32,7 +32,7 @@ final class AVPlayerAudioPlayer: StreamingAudioPlayer {
         player?.play()
     }
     
-    func pause(for url: URL) {
+    func pause() {
         player?.pause()
     }
     
