@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import AVFAudio
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -20,10 +21,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         self.window = window
         window.makeKeyAndVisible()
+        
+        enablePlayback()
     }
 }
 
-extension SceneDelegate {
+private extension SceneDelegate {
     func makeAudioListViewController() -> AudioListViewController {
         let baseURL = URL(string: "https://itunes.apple.com/search")!
         let client = URLSessionHTTPClient()
@@ -33,5 +36,14 @@ extension SceneDelegate {
         let imageDataLoader = RemoteAudioImageDataLoader(client: kingfisherClient)
         
         return AudioListUIComposer.AudioUIComposedWith(audioLoader: audioLoader, audioPlayer: audioPlayer, imageDataLoader: imageDataLoader)
+    }
+    
+    func enablePlayback() {
+        do {
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
+            try AVAudioSession.sharedInstance().setActive(true)
+        } catch {
+            print(error)
+        }
     }
 }
