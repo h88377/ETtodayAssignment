@@ -3,6 +3,9 @@
 ## Design decision
 * Implemented modular system by respecting S.O.L.I.D. principle to create feature (business), UI, API and Streaming layers and composing them in the composite layer. This way, they can be separated into different modules if needed.
 
+#### Test suite
+* Developed UI layer with TDD approach to guarantee UI acting as intended during development. Please refer to my side project [FindYourOnlysClone](https://github.com/h88377/FindYourOnlysClone) if you want to see how I implemented the whole app with TDD and test suite configuration.
+
 #### Feature layer (Business logic)
 * Defined feature abstraction components instead of concrete types. This way, the system can be more flexible when facing requirements changes by creating different implementations of the abstraction and composing them differently without altering the existed components.  
 
@@ -22,6 +25,7 @@
 
 ## Requirements
 > pod install would be needed
+> 
 > Xcode 13 or later  
 > iOS 15.0 or later  
 > Swift 4 or later
