@@ -23,6 +23,11 @@
 * Acted as all layers' clients to initialize all components this application needs.
 * Also decorated components differently based on the requirements.
 
+## Libraries
+* [Kingfisher](https://github.com/onevcat/Kingfisher) - Facilitated the image cache mechanism.
+* [SnapKit](https://github.com/SnapKit/SnapKit) - Facilitated the UI layout.
+* [RxSwift](https://github.com/ReactiveX/RxSwift) - Acted as binding strategy.
+
 ## Requirements
 > pod install would be needed
 > 
